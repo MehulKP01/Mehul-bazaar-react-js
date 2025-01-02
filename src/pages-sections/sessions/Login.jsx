@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Box, styled, Typography } from "@mui/material";
 import { Link } from "react-scroll";
 import { Formik } from "formik";
@@ -454,4 +454,4 @@ const Login = ({ onSuccess, closeModal, isModal = true }) => {
   );
 };
 
-export default memo(Login);
+export default Login;

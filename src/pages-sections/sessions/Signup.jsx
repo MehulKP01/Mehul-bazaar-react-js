@@ -160,7 +160,7 @@ const Signup = () => {
       <SocialButtons />
       <FlexRowCenter mt="1.25rem">
         <Box>Already have an account?</Box>
-        <Link href="#">
+        <Link href="/login">
           <H6 ml={1} borderBottom="1px solid" borderColor="grey.900">
             Login
           </H6>

@@ -34,11 +34,6 @@ const MiniCart = ({ toggleSidenav }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state?.shop?.cart);
   
-
-  
-  console.log("🚀 ~ MiniCart ~ cart:", cart)
-  
-
   const [isLoading, setIsLoading] = useState(false);
   const [productId, setProductId] = useState();
   const currency = useSelector((state) => state?.shop?.currency);

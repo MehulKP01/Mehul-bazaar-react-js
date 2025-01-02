@@ -32,6 +32,7 @@ import {
 import { getCurrencyData } from "../src//redux/action";
 import { api } from "../src/utils/axiosInstance";
 import ShopLayout1 from "../src/components/layouts/ShopLayout1";
+import Ordersale from "./ordersale/page.jsx"
 
 // Create Emotion cache
 const clientSideEmotionCache = createEmotionCache();
@@ -76,6 +77,7 @@ function App({ children }) {
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
                 <CacheProvider value={clientSideEmotionCache}>
+                <Ordersale />
                   <SEO
                     title="App Title"
                     description="App Description"
