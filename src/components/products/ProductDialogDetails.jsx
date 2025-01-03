@@ -102,7 +102,6 @@ function ProductDialogDetails(props) {
             }
         } catch (error) {
             // Handle error
-            console.error("Error adding product to cart:", error.message);
             setIsLoading(false);
             displaySnackBar("Failed to add product to cart","error","bottom","right")
         }

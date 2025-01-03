@@ -178,16 +178,6 @@ const ProductDetails = ({ product, setSelectedVariant, selectedVariant }) => {
     newParams.set("", newQuery);
     router.push(`${pathname}?${newParams}`);
     
-    // Change the URL without reloading the page
-    // router.push(
-    //   {
-    //     pathname: `/${country_code}/product/${product.slug}`,
-    //     query: newQuery,
-    //   },
-    //   null,
-    //   { shallow: true }
-    // );
-
     getParamValue();
   };
 

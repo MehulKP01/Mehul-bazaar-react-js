@@ -8,7 +8,6 @@ import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import { MobileNavigationBar } from "../../components/mobile-navigation";
 import SearchInputWithCategory from "../../components/search-box/SearchInputWithCategory";
-import TopCountries from "../../components/TopCountries";
 
 /**
  *  Used in:
@@ -21,23 +20,17 @@ import TopCountries from "../../components/TopCountries";
  *  6. checkoutNavLayout and CustomerDashboadLayout component
  */
 
-// ===================================================
-
-// ===================================================
-
 const ShopLayout1 = ({
   children,
   topbarBgColor,
   showTopbar = true,
   showNavbar = true,
-  // showTopCountries = true,
 }) => {
   const [isFixed, setIsFixed] = useState(false);
   const toggleIsFixed = useCallback((fixed) => setIsFixed(fixed), []);
   return (
     <Fragment>
-      {/* TOPCOUNTRIES */}
-      {/* {showTopCountries && <TopCountries bgColor={topbarBgColor} />} */}
+
       {/* TOPBAR */}
       {showTopbar && <Topbar bgColor={topbarBgColor} />}
 
