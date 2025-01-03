@@ -9,12 +9,10 @@ import {
 } from "@mui/material";
 import Carousel from "../../components/carousel/Carousel";
 import { CarouselCard1 } from "../../components/carousel-cards";
-import { useDispatch } from "react-redux";
 import { FlexBetween } from "components/flex-box";
-// import { getCarouselData } from "utils/__api__/homeApis";
 import { getCarouselData } from "../../utils/__api__/homeApis";
 import { isValidArray } from "../../common/validation";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 // ======================================================
 
@@ -23,15 +21,19 @@ const Section1 = () => {
     "https://www.shutterstock.com/image-vector/ecommerce-website-banner-template-presents-260nw-2252124451.jpg";
 
   const [carouselData, setCarouselData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
+    setIsLoading(true);
     const getCarousel = async () => {
       const data = await getCarouselData();
       if (isValidArray(data)) {
+        setIsLoading(false);
         setCarouselData(data);
       } else {
+        setIsLoading(false);
         setCarouselData([]);
       }
     };
@@ -39,7 +41,7 @@ const Section1 = () => {
     getCarousel();
   }, []);
 
-  return carouselData?.length > 0 ? (
+  return !isLoading ? (
     <Box bgcolor="white" mb={7.5}>
       <Container
         sx={{
@@ -48,7 +50,7 @@ const Section1 = () => {
         }}
         maxWidth="lg"
       >
-        {carouselData ? (
+        {carouselData?.length > 0 ? (
           <Carousel
             spacing="0px"
             totalSlides={carouselData?.length > 0 ? carouselData?.length : 2}
@@ -165,9 +167,9 @@ const Section1 = () => {
         maxWidth="lg"
       >
         <Box>
-          <Skeleton height={"100px"}/>
+          <Skeleton height={"100px"} />
           <Skeleton animation="wave" height={"100px"} />
-          <Skeleton animation={false} height={"100px"}/>
+          <Skeleton animation={false} height={"100px"} />
         </Box>
       </Container>
     </Box>

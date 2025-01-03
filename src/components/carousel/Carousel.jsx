@@ -1,228 +1,173 @@
-// "use client";
-
-// import { Fragment, Children, useMemo, memo } from "react";
-// import { ArrowBack, ArrowForward } from "@mui/icons-material";
-// import clsx from "clsx";
-// import useSettings from "../../hooks/useSettings";
-// import { Slide } from "pure-react-carousel";
-// import "pure-react-carousel/dist/react-carousel.es.css";
-// import {
-//   StyledDot,
-//   StyledSlider,
-//   StyledDotGroup,
-//   StyledArrowBackButton,
-//   StyledArrowNextButton,
-//   StyledCarouselProvider,
-// } from "./styles";
-
-// // ===================================================================
-
-// // ===================================================================
-
-// export default function Carousel({
-//   sx,
-//   step,
-//   spacing,
-//   infinite,
-//   children,
-//   autoPlay,
-//   interval,
-//   showDots,
-//   dotClass,
-//   dotColor,
-//   showArrow,
-//   totalSlides,
-//   currentSlide,
-//   visibleSlides,
-//   leftButtonClass,
-//   leftButtonStyle,
-//   arrowButtonClass,
-//   rightButtonClass,
-//   rightButtonStyle,
-//   hasMasterSpinner,
-//   isIntrinsicHeight,
-//   naturalSlideWidth,
-//   dotGroupMarginTop,
-//   naturalSlideHeight,
-// }) {
-//   // site settings
-
-//   const { settings } = useSettings();
-
-//   const memoizedSpacing = useMemo(() => spacing || "0px", [spacing]);
-
-//   console.log("mkkkkkkkkkkkk");
-  
-//   return (
-//     <StyledCarouselProvider
-//       sx={sx}
-//       step={step}
-//       spacing={spacing}
-//       interval={interval}
-//       infinite={infinite}
-//       isPlaying={autoPlay}
-//       totalSlides={totalSlides}
-//       currentSlide={currentSlide}
-//       visibleSlides={visibleSlides}
-//       hasMasterSpinner={hasMasterSpinner}
-//       isIntrinsicHeight={isIntrinsicHeight}
-//       naturalSlideWidth={naturalSlideWidth || 100}
-//       naturalSlideHeight={naturalSlideHeight || 125}
-//     >
-//       <StyledSlider spacing={memoizedSpacing}>
-//         {Children?.map(children,(child, ind) => (
-//           <Slide index={ind} key={ind}>
-//             {child}
-//           </Slide>
-//         ))}
-//       </StyledSlider>
-
-//       {showDots && (
-//         <StyledDotGroup
-//           className={clsx(dotClass)}
-//           dot_margin_top={dotGroupMarginTop}
-//           renderDots={(props) =>
-//             renderDots({
-//               ...props,
-//               step,
-//               dotColor,
-//             })
-//           }
-//         />
-//       )}
-
-//       {showArrow && (
-//         <Fragment>
-//           <StyledArrowBackButton
-//             id="backArrowButton"
-//             sx={{
-//               left: "-20px",
-//             }}
-//             style={leftButtonStyle || {}}
-//             className={clsx(leftButtonClass, arrowButtonClass)}
-//           >
-//             {settings.direction === "ltr" ? (
-//               <ArrowBack fontSize="small" color="#fff" />
-//             ) : (
-//               <ArrowForward fontSize="small" color="#fff" />
-//             )}
-//           </StyledArrowBackButton>
-
-//           <StyledArrowNextButton
-//             id="backForwardButton"
-//             sx={{
-//               right: "-20px",
-//             }}
-//             style={rightButtonStyle || {}}
-//             className={clsx(arrowButtonClass, rightButtonClass)}
-//           >
-//             {settings.direction === "ltr" ? (
-//               <ArrowForward fontSize="small" color="#fff" />
-//             ) : (
-//               <ArrowBack fontSize="small" color="#fff" />
-//             )}
-//           </StyledArrowNextButton>
-//         </Fragment>
-//       )}
-//     </StyledCarouselProvider>
-//   );
-// }
-// const renderDots = ({
-//   step,
-//   dotColor,
-//   totalSlides,
-//   currentSlide,
-//   visibleSlides,
-//   carouselStore,
-// }) => {
-//   const dots = [];
-//   const total = totalSlides - visibleSlides + 1;
-//   // handle dot button
-//   const handleClick = (currentSlide, autoplay) => {
-//     carouselStore.setStoreState({
-//       autoPlay: autoplay,
-//       currentSlide: currentSlide,
-//     });
-//   };
-//   for (let i = 0; i < total; i += step) {
-//     dots.push(
-//       <StyledDot
-//         dot_color={dotColor}
-//         onClick={() => handleClick(i, false)}
-//         dot_active={currentSlide === i ? i + 1 : 0}
-//         key={(Math.random() * i + Date.now()).toString()}
-//       />
-//     );
-//     if (total - (i + 1) < step && total - (i + 1) !== 0) {
-//       dots.push(
-//         <StyledDot
-//           dot_color={dotColor}
-//           dot_active={totalSlides - visibleSlides}
-//           key={(Math.random() * i + Date.now()).toString()}
-//           onClick={() => handleClick(totalSlides - visibleSlides, false)}
-//         />
-//       );
-//     }
-//   }
-//   return dots;
-// };
-// Carousel.defaultProps = {
-//   sx: {},
-//   step: 1,
-//   interval: 2000,
-//   showDots: false,
-//   showArrow: true,
-//   autoPlay: false,
-//   infinite: false,
-//   totalSlides: 10,
-//   visibleSlides: 5,
-//   spacing: "1.5rem",
-//   naturalSlideWidth: 100,
-//   naturalSlideHeight: 125,
-//   hasMasterSpinner: false,
-//   isIntrinsicHeight: true,
-//   dotGroupMarginTop: "2rem",
-//   arrowButtonColor: "secondary",
-// };
-
-
-import React from 'react';
+import React, { useState, useEffect, useMemo } from "react";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import clsx from "clsx";
 
 const Carousel = ({
-  children, 
-  visibleSlides = 3, 
+  children,
+  visibleSlides = 3,
   totalSlides,
+  step = 1,
+  interval = 2000,
+  showDots = false,
+  showArrow = true,
+  autoPlay = false,
+  infinite = false,
+  dotClass = "",
+  dotColor = "#3399cc",
+  leftButtonClass = "",
+  leftButtonStyle = {},
+  rightButtonClass = "",
+  rightButtonStyle = {},
+  sx = {},
+  dotGroupMarginTop = "2rem",
 }) => {
-  // Ensure children is an array
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
+
+  // Convert children to an array
   const childArray = React.Children.toArray(children);
-  
+
   // Use total slides from prop or child array length
   const slidesToRender = totalSlides || childArray.length;
 
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slidesToRender - 1 : prevSlide - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === slidesToRender - 1 ? 0 : prevSlide + 1
+    );
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentSlide(index);
+  };
+
+  // Autoplay functionality
+  useEffect(() => {
+    let intervalId;
+    if (isPlaying) {
+      intervalId = setInterval(handleNext, interval);
+    }
+    return () => clearInterval(intervalId);
+  }, [isPlaying, interval]);
+
+  const renderDots = () => {
+    const total = slidesToRender;
+    const dots = [];
+    for (let i = 0; i < total; i += step) {
+      dots.push(
+        <div
+          className={clsx(dotClass, { active: currentSlide === i })}
+          style={{
+            backgroundColor: currentSlide === i ? dotColor : "#ddd",
+            width: "10px",
+            height: "10px",
+            borderRadius: "50%",
+            margin: "0 5px",
+            cursor: "pointer",
+          }}
+          key={i}
+          onClick={() => handleDotClick(i)}
+        />
+      );
+    }
+    return dots;
+  };
+
   return (
-    <div className="carousel-container">
-      <div 
-        className="carousel-wrapper" 
+    <div className="carousel-container" style={{ ...sx, position: "relative" }}>
+      <div
+        className="carousel-wrapper"
         style={{
-          display: 'flex',
-          overflow: 'hidden',
-          width: '100%'
+          display: "flex",
+          overflow: "hidden",
+          width: "100%",
         }}
       >
-        {childArray.slice(0, slidesToRender).map((child, index) => (
-          <div 
-            key={`slide-${index}`} 
+        {childArray
+          .slice(currentSlide, currentSlide + visibleSlides)
+          .map((child, index) => (
+            <div
+              key={`slide-${index}`}
+              style={{
+                flex: `0 0 ${100 / visibleSlides}%`,
+                maxWidth: `${100 / visibleSlides}%`,
+                padding: "0 10px",
+                boxSizing: "border-box",
+              }}
+            >
+              {child}
+            </div>
+          ))}
+      </div>
+
+      {totalSlides > 3 && showArrow ? (
+        <>
+          {/* Left Arrow */}
+          <button
+            onClick={handlePrev}
+            className={clsx(leftButtonClass)}
+            disabled={false}
             style={{
-              flex: `0 0 ${100 / visibleSlides}%`,
-              maxWidth: `${100 / visibleSlides}%`,
-              padding: '0 10px',
-              boxSizing: 'border-box'
+              ...leftButtonStyle,
+              position: "absolute",
+              top: "50%",
+              left: "10px",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              background: "#3399cc",
+              border: "none",
+              borderRadius: "50%",
+              padding: "10px",
+              color: "#fff",
+              cursor: "pointer",
             }}
           >
-            {child}
-          </div>
-        ))}
-      </div>
+            <ArrowBack fontSize="small" />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={handleNext}
+            className={clsx(rightButtonClass)}
+            style={{
+              ...rightButtonStyle,
+              position: "absolute",
+              top: "50%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              background: "#3399cc",
+              border: "none",
+              borderRadius: "50%",
+              padding: "10px",
+              color: "#fff",
+              cursor: "pointer",
+            }}
+          >
+            <ArrowForward fontSize="small" />
+          </button>
+        </>
+      ) : (
+        <></>
+      )}
+
+      {showDots && (
+        <div
+          className="dot-group"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: dotGroupMarginTop,
+          }}
+        >
+          {renderDots()}
+        </div>
+      )}
     </div>
   );
 };
