@@ -14,7 +14,6 @@ import {
     updateTopRattingProducts,
     productsCount,
     getSubject,
-    getpaymentcountrycode,
     getCouponDetails,
 } from "./reducers/shop.reducer";
 import { api } from "../utils/axiosInstance";
@@ -40,14 +39,10 @@ const refreshCart = () => {
 
 const addGuestUser = async () => {
     const token = getCookie("auth-token");
-    // console.log("request_",token)
-
     if (!token) {
         try {
             const { data } = await api.post("auth/guest/login");
-            // console.log("Guest Login Response: ", data);
             if (data.status) {
-                // console.log("Guest Login Response: ", data)
                 setCookie("auth-token", data.token);
                 setCookie("is-guest", data.user.role === "guest");
                 setCookie("user-id", data.user.id);
@@ -127,12 +122,9 @@ const applyCoupon = (code) => {
             const { data } = await api.post("order/cart/apply-coupon", {
                 coupon_code: code,
             });
-            console.log("coupon_code",data);
-            // if (data.status) {
             dispatch(getCouponDetails(data));
             dispatch(refreshCart());
             return data;
-            // }
         } catch (e) {
             console.log("applyCoupon: Error:", e);
         }
@@ -162,43 +154,12 @@ const getAddresses = (AddressPayload) => {
             if (data.status) {
                 dispatch(setAddress(data.addresses));
                 return data;
-            } else {
-                // dispatch(setAddress({ addresses: [] }));
             }
         } catch (e) {
             console.log("getAddresses: Error:", e);
         }
     };
 };
-// const getAddAddresses = (addnewadress) => {
-//     return async (dispatch) => {
-//         try {
-//             if (!addnewadress) {
-//                 return;
-//             }
-//             const { data } = await api.post("user/address/add", addnewadress);
-//             if (data.status) {
-//                 dispatch(getAddresses());
-//             }
-//             return data;
-//         } catch (e) {
-//             console.log("getAddAddresses: Error:", e);
-//         }
-//     };
-// };
-// const getSaveAddresses = (savedata) => {
-//     return async (dispatch) => {
-//         try {
-//             const { data } = await api.post("user/address/save", savedata);
-//             if (data?.status) {
-//                 dispatch(getAddresses());
-//                 return data;
-//             }
-//         } catch (e) {
-//             console.log("getSaveAddresses: Error:", e);
-//         }
-//     };
-// };
 const getUserEditAddresses = (addressEditID) => {
     return async (dispatch) => {
         try {
@@ -222,7 +183,6 @@ const getWishlistProducts = ({ limit, page }) => {
                 limit,
                 page,
             });
-            // console.log("getWishlistProducts: ", data)
             if (data.success) {
                 dispatch(updateWhishlistProducts(data));
             }
@@ -233,7 +193,6 @@ const getWishlistProducts = ({ limit, page }) => {
 };
 
 const addToWishList = async (productId) => {
-    // return async (dispatch) => {
     const guest = await addGuestUser();
 
     try {
@@ -245,7 +204,6 @@ const addToWishList = async (productId) => {
         console.log("addToWishList: Error:", e);
         return null;
     }
-    // }
 };
 
 const removeFromWishlist = async (productId) => {
@@ -315,7 +273,6 @@ const addNewAddress = (newAddresses) => {
             });
             if (data.status) {
                 dispatch(getAddresses());
-                // dispatch(selectAddresses())
             }
             return data;
         } catch (e) {
@@ -357,16 +314,11 @@ const setDeleteAddress = (id) => {
 
 const verifyPayment = async (orderData) => {
     try {
-        console.log("this functions run in actions");
         const { data } = await api.post(
             "order/razorpay-verification",
             orderData
         );
-
-        // if (data.status) {
         return data;
-        //     return data
-        // }
     } catch (e) {
         console.log("verifyPayment: Error:", e);
         return null;
@@ -374,16 +326,12 @@ const verifyPayment = async (orderData) => {
 };
 
 const placedOrder = (orderData) => {
-    console.log("placedOrder", orderData);
     return async (dispatch) => {
         try {
             const { data } = await api.post("order/place", orderData );
-console.log("place order",data);
-            // if (data.status) {
+
             dispatch(refreshCart());
             return data;
-            //     return data
-            // }
         } catch (e) {
             console.log("placedOrder: Error:", e);
         }
@@ -411,7 +359,6 @@ const getOrdersById = (id) => {
         try {
             const { data } = await api.post(`order/${id}`);
             if (data.status) {
-                // dispatch(refreshCart());
                 return data;
             }
         } catch (e) {
@@ -449,7 +396,6 @@ const orderLengthCount = () => {
     return async (dispatch) => {
         try {
             const { data } = await api.post("/order/statistics");
-            // dispatch(staticCount(data));
             return data;
         } catch (e) {
             console.log("orderLengthCount: Error:", e);
@@ -485,7 +431,6 @@ const getAllTopRating = () => {
     return async (dispatch) => {
         try {
             const { data } = await api.post("product/top-rating");
-            // setTopRating(data.products);
             if (data && data.status) {
                 dispatch(updateTopRattingProducts(data.products));
             }
@@ -498,10 +443,7 @@ const getAllNewArrival = () => {
     return async (dispatch) => {
         try {
             const { data } = await api.get("app/get-last-ten-products");
-            // if(data && data.status){
             dispatch(updateNewArrivalProducts(data.data));
-            // }
-            //   setArrival(jsonData.data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -511,7 +453,6 @@ const getAllBigDiscounts = () => {
     return async (dispatch) => {
         try {
             const { data } = await api.post("product/top-discounted");
-            // setBigDiscount(data.result);
             if (data && data.status) {
                 dispatch(updateBigDiscountProducts(data.result));
             }
@@ -528,7 +469,6 @@ const getAllRelatedProducts = (payload) => {
                 limit: payload.limit,
             });
             if (data.status) {
-                // setRelatedProducts(data.relatedProducts);
                 dispatch(updateRelatedProducts(data.products));
             }
         } catch (error) {
@@ -550,14 +490,11 @@ const getAllProducts = (payLoad) => {
         limit: payLoad.limit,
         page: payLoad.page,
       });
-      // console.log("allproducts", data);
       if (data && data.status) {
         dispatch(updateStoreProducts(data?.products));
         dispatch(productsCount(data?.count));
         return data;
-      } else {
-        console.error("Unexpected response:", data);
-      }
+      } 
     } catch (e) {
       console.log("getbrandfilterall: Error:", e);
     }
@@ -571,8 +508,6 @@ const getAppDataLogo = () => {
             if (data && data.status) {
                 dispatch(getappdata(data));
                 return data;
-            } else {
-                console.error("Unexpected response:", data);
             }
         } catch (e) {
             console.log("getAppDataLogo: Error:", e);
@@ -586,8 +521,6 @@ const getAllSubject = () => {
             if (data && data.status) {
                 dispatch(getSubject(data.subjects));
                 return data;
-            } else {
-                console.error("Unexpected response:", data);
             }
         } catch (e) {
             console.log("getAllSubject: Error:", e);

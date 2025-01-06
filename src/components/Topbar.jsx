@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Add,
   ExpandMore,
@@ -14,29 +14,22 @@ import {
   Box,
   Chip,
   Container,
-  FormControl,
   IconButton,
-  InputLabel,
   MenuItem,
-  Select,
   styled,
   useMediaQuery,
 } from "@mui/material";
 import TouchRipple from "@mui/material/ButtonBase";
 import { Span } from "components/Typography";
-import { FlexBetween, FlexBox } from "components/flex-box";
+import { FlexBetween } from "components/flex-box";
 import BazaarMenu from "components/BazaarMenu";
 import { layoutConstant } from "utils/constants";
 import { useRouter } from "next/navigation";
-// import countryList from "../../pages/countryList.json";
 import { makeStyles } from '@material-ui/core/styles';
-import { Stack, height } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
-import { getCountryCode, setCurrency } from "../../src/redux/reducers/shop.reducer"
-import { getCurrencyCode } from "../../src/redux/action"
-import { currencyFormat } from "lib";
+import { setCurrency } from "../../src/redux/reducers/shop.reducer"
 
 // styled component
 const TopbarWrapper = styled(Box, {
@@ -130,16 +123,9 @@ const Topbar = ({ bgColor }) => {
   const appdatalogo = useSelector((state) => state?.shop?.appdata?.app)
   const currencies = useSelector((state) => state?.shop?.currencies)
   const selectedCurrency = useSelector((state) => state?.shop?.currency)
-  // console.log('countries',countries)
   const router = useRouter();
 
-  
-  
-  
-  // const { pathname, asPath, query } = router;
-
   const [expand, setExpand] = useState(false);
-  // const [language, setLanguage] = useState('india');
 
   useMemo(() => {
    

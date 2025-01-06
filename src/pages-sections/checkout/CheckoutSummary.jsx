@@ -109,7 +109,6 @@ const CheckoutSummary = () => {
         displaySnackBar(removeCouponCode?.message,"success","top","right")
       }
     } catch (error) {
-      console.error("Error removing coupon code:", error);
       displaySnackBar("Failed to remove coupon code", "error","top","right")
     }
   };

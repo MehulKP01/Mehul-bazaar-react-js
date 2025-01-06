@@ -62,26 +62,6 @@ const CarouselCard1 = ({
         <Grid item className="grid-item" md={5} sm={6} xs={12}>
           <h1  className="title">{title}</h1>
           <Paragraph my={2} dangerouslySetInnerHTML={{ __html: description }} />
-
-          {/* <Paragraph color="secondary.main" mb={2.7}>
-            {description}
-          </Paragraph> */}
-
-          <a href={buttonLink}>
-            <Button
-              size="large"
-              disableElevation
-              color={buttonColor}
-              variant="contained"
-              className="button-link"
-              sx={{
-                height: 44,
-                borderRadius: "4px",
-              }}
-            >
-              {buttonText}
-            </Button>
-          </a>
         </Grid>
 
         <Grid item md={7} sm={6} xs={12}>

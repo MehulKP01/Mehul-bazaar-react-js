@@ -105,7 +105,6 @@ const ProductDetails = ({ product, selectedVariant }) => {
         displaySnackBar(response?.message,"error","bottom","right")
         }
       } catch (e) {
-        console.log("E here", e);
         displaySnackBar(e?.message,"error","bottom","right")
       }
     }

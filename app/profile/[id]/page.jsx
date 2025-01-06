@@ -192,7 +192,6 @@ const ProfileEditor = () => {
             router.push("/profile");
           }
         } catch (error) {
-          console.error(error);
           displaySnackBar(
             "An error occurred while saving the profile",
             "error",

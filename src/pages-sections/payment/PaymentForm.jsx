@@ -139,10 +139,6 @@ const PaymentForm = () => {
 
     try {
       const orderDetails = await dispatch(placedOrder(orderData));
-      
-
-      console.log("🚀 ~ placeOrder ~ orderData:", orderData)
-      
 
       if (orderDetails?.status) {
         if (paymentMethod === "razorpay") {

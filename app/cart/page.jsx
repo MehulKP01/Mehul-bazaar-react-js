@@ -252,7 +252,6 @@ const Cart = () => {
         displaySnackBar(response?.message, "warning", "bottom", "right");
       }
     } catch (error) {
-      console.error("Error adding product to cart:", error.message);
       displaySnackBar(
         "Failed to add product to cart",
         "error",

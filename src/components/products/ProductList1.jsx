@@ -11,6 +11,12 @@ const SEO =  dynamic(()=> import("../../components/SEO"),{ssr : false})
 import dynamic from "next/dynamic";
 
 const ProductList1 = ({ products, handleChangePage, page }) => {
+
+// console.log("🚀 ~ ProductList1 ~ page:", page)
+// console.log("🚀 ~ ProductList1 ~ products:", products)
+
+  
+  
   const router = useRouter();
   const params = useSearchParams()
   const dispatch = useDispatch();
@@ -99,13 +105,13 @@ const ProductList1 = ({ products, handleChangePage, page }) => {
             <p>No Products Found</p>
           )}
         </Span>
-        <Pagination
+        {/* <Pagination
           variant="outlined"
           color="primary"
           onChange={handleChangePage}
           count={Math.ceil(productShopCount / rowsPerPage)}
           page={page + 1}
-        />
+        /> */}
       </FlexBetween>
     </Fragment>
   );

@@ -254,7 +254,6 @@ const AddressList = () => {
         displaySnackBar(response?.message, "error", "top", "right");
       }
     } catch (error) {
-      console.error(error);
       displaySnackBar(
         "An error occurred. Please try again later",
         "error",
@@ -297,7 +296,6 @@ const AddressList = () => {
         displaySnackBar(response?.error, "error", "top", "right");
       }
     } catch (error) {
-      console.error(error);
       displaySnackBar(
         "An error occurred. Please try again later",
         "error",

@@ -22,7 +22,6 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
-            // console.log("reducer",action.payload.isGuest)
             state.isAuthenticated = true;
             state.isGuest = JSON.parse(action.payload.isGuest);
             state.userId = action.payload.userId;
@@ -30,16 +29,13 @@ const userSlice = createSlice({
             state.token = action.payload.token;
             state.error = null;
             state.loading = false;
-            // console.log("_payload_", action.payload);
         },
 
         loginFailure: (state, action) => {
             state.isAuthenticated = false;
             state.user = null;
-            //state.token = null;
             state.error = action.payload;
             state.loading = false;
-            //
             state.userId = null;
             state.user = null;
             state.error = null;
@@ -47,7 +43,6 @@ const userSlice = createSlice({
         logout: (state) => {
             state.isAuthenticated = false;
             state.error = null;
-            //state.token = null;
             state.isGuest = true;
             state.loading = false;
         },

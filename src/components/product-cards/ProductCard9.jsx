@@ -89,7 +89,6 @@ const ProductCard9 = (props) => {
       }
     } catch (e) {
       setIsLoading(false)
-      console.log("error", e)
     }
   }
 

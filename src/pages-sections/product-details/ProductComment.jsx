@@ -15,8 +15,6 @@ const ProductComment = (props) => {
 
   const getColor = useCallback((rating) => {
       var color = rating > 3.9 ? "green" : rating > 1.9 ? "warn" : "red";
-      console.log(color,rating);
-
       return {
           "& .MuiRating-iconFilled": {
               color,

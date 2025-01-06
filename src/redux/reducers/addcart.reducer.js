@@ -15,8 +15,6 @@ const addToCartSlice = createSlice({
           let cartList = state.cart;
           let cartItem = action.payload;
           let exist = cartList.find((item) => item.id === cartItem.id);
-            // console.log(exist)  
-    
           if (cartItem.qty < 1) {
             const filteredCart = cartList.filter((item) => item.id !== cartItem.id);
             return {
@@ -48,16 +46,8 @@ const addToCartSlice = createSlice({
           return state;
         }
       }
-
-      // const item = action.payload
-      // const existItem = state.cartItem.find((x) => x.id === item.id)
-      // if(existItem){
-      // }else{
-      //   state.cartItem = [...state.cartItem, item]
-      // }
     },
     ChangeCart: (state, action) => {
-      console.warn("action-=-=-=-=-", action);
       state.cartItem = action.payload
      },
     

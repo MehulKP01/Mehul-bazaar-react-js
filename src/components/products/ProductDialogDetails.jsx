@@ -152,7 +152,6 @@ function ProductDialogDetails(props) {
             }
         } catch (error) {
             setIsLoading(false);
-            console.error("Error changing quantity in cart:", error?.message);
             displaySnackBar("Failed to update quantity","error","bottom","right")
         }
     };

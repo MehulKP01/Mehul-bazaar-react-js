@@ -48,7 +48,6 @@ const reducer = (state, action) => {
       let cartList = state.cart;
       let cartItem = action.payload;
       let exist = cartList.find((item) => item.id === cartItem.id);
-        console.log(exist)  
 
       if (cartItem.qty < 1) {
         const filteredCart = cartList.filter((item) => item.id !== cartItem.id);

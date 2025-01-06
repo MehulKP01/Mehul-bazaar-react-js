@@ -200,12 +200,10 @@ const FrequentlyBought = ({ product, boughtFrequently }) => {
         );
       }
     } catch (error) {
-      // Show API error message or a generic message if not available
       displaySnackBar(
         error?.response?.data?.message || "Failed to add product to cart",
         "error"
       );
-      console.error("Failed to add product to cart", error);
     }
   };
 

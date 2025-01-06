@@ -1,8 +1,8 @@
 "use client"
 
 import { memo, useState } from "react";
-// ================================================================
-// ================================================================
+
+
 export function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
   if (b[orderBy] > a[orderBy]) return 1;
@@ -22,8 +22,8 @@ export function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-// ================================================================
-// ================================================================
+
+
 const useMuiTable = (props) => {
   const {
     listData = [],
@@ -70,6 +70,7 @@ const useMuiTable = (props) => {
     setSelected(newSelected);
   };
   const handleChangePage = (_, newPage) => setPage(newPage - 1);
+  
   // It won't use slice if data is limited to per page
   const filteredList = isLimitedData
     ? stableSort(listData, getComparator(order, orderBy))

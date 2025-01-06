@@ -17,7 +17,6 @@ import {
   IconButton,
   styled,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 const LazyImage = dynamic(() => import("../../components/LazyImage"), {
   ssr: false,
@@ -46,6 +45,7 @@ import {
 } from "../../redux/action";
 import { removeWhishlistProducts } from "../../../src/redux/reducers/shop.reducer";
 import dynamic from "next/dynamic";
+import { displaySnackBar } from "common/snackBar";
 
 // styled components
 const StyledBazaarCard = styled(BazaarCard)({
@@ -131,7 +131,6 @@ const ProductCard1 = (props) => {
   } = product;
 
   const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
   const cart = useSelector((state) => state?.shop?.cart);
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -151,42 +150,18 @@ const ProductCard1 = (props) => {
       setIsWishlist(!isWishlist);
       if (data?.status) {
         dispatch(removeWhishlistProducts(id));
-        enqueueSnackbar(data?.message, {
-          variant: "success",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar(data?.message,"success","bottom","right")
       } else {
-        enqueueSnackbar(data?.message, {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar(data?.message,"error","bottom","right")
       }
     } else {
       const data = await addToWishList(id);
       setIsWishlist(!isWishlist);
 
       if (data?.status) {
-        enqueueSnackbar(data?.message, {
-          variant: "success",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar(data?.message,"success","bottom","right")
       } else {
-        enqueueSnackbar(data?.message, {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar(data?.message,"error","bottom","right")
       }
     }
   };
@@ -205,34 +180,14 @@ const ProductCard1 = (props) => {
       const response = await dispatch(addProductIntoCart(id, variationId, qty)); // Assuming 1 quantity for now, modify as needed
       // Show success message
       if (response?.status) {
-        enqueueSnackbar(response?.message, {
-          variant: "success",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-          autoHideDuration: 6000,
-        });
+        displaySnackBar(response?.message,"success","bottom","right")
       } else {
-        enqueueSnackbar(response?.message, {
-          variant: "success",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar(response?.message,"success","bottom","right")
       }
     } catch (error) {
       // Handle error
       setIsLoading(false);
-      console.error("Error adding product to cart:", error?.message);
-      enqueueSnackbar("Failed to add product to cart", {
-        variant: "error",
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "right",
-        },
-      });
+      displaySnackBar("Failed to add product to cart","error","bottom","right")
     }
   };
 
@@ -245,43 +200,16 @@ const ProductCard1 = (props) => {
           changeQuantityInCart(cartProduct?._id, qty)
         );
         // Show success message
-        if (response.status) {
-          enqueueSnackbar(response?.message, {
-            variant: "success",
-            anchorOrigin: {
-              vertical: "bottom",
-              horizontal: "right",
-            },
-          });
+        if (response?.status) {
+        displaySnackBar(response?.message,"success","bottom","right")
         } else {
-          enqueueSnackbar(response?.message, {
-            variant: "error",
-            anchorOrigin: {
-              vertical: "bottom",
-              horizontal: "right",
-            },
-          });
+        displaySnackBar(response?.message,"error","bottom","right")
         }
       } else {
-        console.error("No product found in cart");
-        enqueueSnackbar("No product found in cart", {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar("No product found in cart","error","bottom","right")
       }
     } catch (error) {
-      // Handle error
-      console.error("Error changing quantity in cart:", error.message);
-      enqueueSnackbar("Failed to update quantity", {
-        variant: "error",
-        anchorOrigin: {
-          vertical: "bottom",
-          horizontal: "right",
-        },
-      });
+      displaySnackBar("Failed to update quantity","error","bottom","right")
     }
   };
 

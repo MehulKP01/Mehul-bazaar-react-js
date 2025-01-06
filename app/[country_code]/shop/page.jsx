@@ -68,6 +68,9 @@ const ShopPage = () => {
     listData: products,
     isLimitedData: true,
   });
+
+  console.log("🚀 ~ ShopPage ~ page:", page)
+  
   const firstOption = sortOptions?.find((option) => option);
 
   useEffect(() => {

@@ -78,8 +78,6 @@ const CheckoutForm = () => {
   }
 
   const handleFormSubmit = async () => {
-    console.log("🚀 ~ handleFormSubmit ~ usersDetails",  usersDetails?.email || usersDetails?.name || usersDetails?.phone)
-
     if (
       usersDetails?.email === "" ||
       usersDetails?.name === "" ||
@@ -104,17 +102,9 @@ const CheckoutForm = () => {
       if (selectedAddress) {
         router.push("/payment");
       } else {
-        enqueueSnackbar("Select Your Address", {
-          variant: "error",
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "right",
-          },
-        });
+        displaySnackBar("Select Your Address", "error", "bottom", "right");
       }
     } else {
-      console.log(usersDetails,"usersDetailsusersDetailsusersDetailsusersDetailsusersDetails");
-      
       if (selectedAddress) {
         router.push("/payment");
       } else {
