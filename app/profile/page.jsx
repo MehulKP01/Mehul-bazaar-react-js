@@ -3,29 +3,25 @@
 import Link from "next/link";
 import { Person } from "@mui/icons-material";
 import { Avatar, Box, Button, Card, Grid, useMediaQuery } from "@mui/material";
-import TableRow from "components/TableRow";
+const TableRow = lazy(()=> import("components/TableRow")) ;
 import { H3, H5, Small } from "components/Typography";
 import { FlexBetween, FlexBox } from "components/flex-box";
-const UserDashboardHeader = dynamic(
-  () => import("../../src/components/header/UserDashboardHeader"),
-  { ssr: false }
+const UserDashboardHeader = lazy(() =>
+  import("../../src/components/header/UserDashboardHeader")
 );
-const CustomerDashboardLayout = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard"),
-  { ssr: false }
+const CustomerDashboardLayout = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard")
 );
-const CustomerDashboardNavigation = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard/Navigations"),
-  { ssr: false }
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard/Navigations")
 );
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { api } from "../../src/utils/axiosInstance";
 import { getMediaPath } from "../../src/lib";
 import { orderLengthCount } from "../../src/redux/action";
 import { updateUserProfile } from "../../src/redux/reducers/user.reducer";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 // ============================================================
 
 const Profile = () => {

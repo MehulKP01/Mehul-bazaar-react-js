@@ -11,17 +11,20 @@ import {
   Rating,
   styled,
 } from "@mui/material";
-const Image = dynamic(()=> import("../../components/BazaarImage"),{ssr : false});
+import Image from "../../components/BazaarImage";
 import { H5, Span } from "../../components/Typography";
 import { FlexBox } from "../../components/flex-box";
 import { currencyFormat, getMediaPath } from "../../lib";
-import { addProductIntoCart, addToWishList, changeQuantityInCart, removeFromWishlist } from "../../redux/action";
-import { Fragment, memo, useMemo, useState } from "react";
+import {
+  addProductIntoCart,
+  addToWishList,
+  changeQuantityInCart,
+  removeFromWishlist,
+} from "../../redux/action";
+import { Fragment, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
-import { updateProduct } from "../../redux/reducers/shop.reducer"
-import dynamic from "next/dynamic";
+import { updateProduct } from "../../redux/reducers/shop.reducer";
 import { displaySnackBar } from "common/snackBar";
 
 // styled components
@@ -47,81 +50,79 @@ const ProductCard9 = (props) => {
     regularPrice,
     averageRating,
     image,
-    discount ,
+    discount,
     type,
-    isInWishlist
+    isInWishlist,
   } = product;
   const cart = useSelector((state) => state?.shop?.cart);
-  const currency = useSelector((state) => state?.shop?.currency)
+  const currency = useSelector((state) => state?.shop?.currency);
   const dispatch = useDispatch();
   const [productId, setProductId] = useState();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const router = useRouter()
-
+  const router = useRouter();
 
   const handleSlug = (slug) => {
     router.push({
-      pathname: slug
-    })
-  }
+      pathname: slug,
+    });
+  };
   const ViewSlug = (slug) => {
     router.push({
-      pathname: slug
-    })
-
-  }
+      pathname: slug,
+    });
+  };
   const cartProduct = useMemo(() => {
-    setIsLoading(false)
+    setIsLoading(false);
     return cart?.products?.find((p) => p?.productId?._id == productId);
   }, [cart, dispatch]);
 
   const handleAddProductIntoCarts = async (id, qty) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      setProductId(id)
-      const variationId = null
-      const response = await dispatch(addProductIntoCart(id, variationId, qty))
+      setProductId(id);
+      const variationId = null;
+      const response = await dispatch(addProductIntoCart(id, variationId, qty));
       if (response?.status) {
-        displaySnackBar(response?.message,"success","bottom","right")
+        displaySnackBar(response?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(response?.message,"error","bottom","right")
+        displaySnackBar(response?.message, "error", "bottom", "right");
       }
     } catch (e) {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
-
+  };
 
   const handleChangeQtyCarts = async (qty) => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (cartProduct) {
-      const response = await dispatch(changeQuantityInCart(cartProduct?._id, qty));
+      const response = await dispatch(
+        changeQuantityInCart(cartProduct?._id, qty)
+      );
       if (response?.status) {
-        displaySnackBar(response?.message,"success","bottom","right")
+        displaySnackBar(response?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(response?.message,"error","bottom","right")
+        displaySnackBar(response?.message, "error", "bottom", "right");
       }
     }
-  }
+  };
   const handleToggleWishlist = async (isAddToWishlist) => {
     if (!isAddToWishlist) {
       const data = await removeFromWishlist(id);
       if (data?.status) {
-
         dispatch(updateProduct({ ...product, isInWishlist: false }));
-        displaySnackBar(data?.message,"success","bottom","right")
+        displaySnackBar(data?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+        displaySnackBar(data?.message, "error", "bottom", "right");
       }
     } else {
       const data = await addToWishList(id);
 
       if (data?.status) {
-        displaySnackBar(data?.message,"success","bottom","right")
+        displaySnackBar(data?.message, "success", "bottom", "right");
         dispatch(updateProduct({ ...product, isInWishlist: true }));
       } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+        displaySnackBar(data?.message, "error", "bottom", "right");
       }
     }
   };
@@ -144,7 +145,6 @@ const ProductCard9 = (props) => {
 
   return (
     <Wrapper>
-      
       <IconButton
         size="small"
         sx={{
@@ -160,7 +160,7 @@ const ProductCard9 = (props) => {
           <FavoriteBorder fontSize="small" color="primary" />
         )}
       </IconButton>
-      
+
       <Grid container spacing={1}>
         <Grid item sm={3} xs={12}>
           <Box position="relative">
@@ -204,73 +204,100 @@ const ProductCard9 = (props) => {
                 {currencyFormat(minToMaxPrice?.min, currency)}
               </H5>
 
-                <Span fontWeight="600" color="grey.600">
-                  <del>{currencyFormat(regularPrice, currency)}</del>
-                </Span>
+              <Span fontWeight="600" color="grey.600">
+                <del>{currencyFormat(regularPrice, currency)}</del>
+              </Span>
             </FlexBox>
-  
+
             <FlexBox
               width="80px"
               alignItems="center"
               className="add-cart"
               flexDirection="column-reverse"
-              justifyContent={!!cartProduct?.quantity ? "space-between" : "flex-start"}
-            >
-              {!cartProduct ? <>
-                {type == "simple" ?
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    sx={{
-                      padding: "3px",
-                      marginRight: "20px"
-                    }}
-                    onClick={() => {
-                      handleAddProductIntoCarts(id, 1)
-                    }}
-                  >
-                    {isLoading ? <CircularProgress size="1rem" /> : <Add fontSize="small" />}
-                  </Button>
-                  : <Button color="primary" variant="outlined" style={{ width: "70px", height: "35x", marginRight: "30px" }} onClick={() => {
-                    ViewSlug(`/product/${slug}`);
-                  }}>
-                    view
-                  </Button>}
-              </> : <>
-                <Fragment>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    sx={{
-                      padding: "3px",
-                      marginRight: "20px"
-                    }}
-                    onClick={(e) => handleChangeQtyCarts((cartProduct?.quantity ?? 0) - 1)}
-                  >
-                    <Remove fontSize="small" />
-                  </Button>
-                  <Box color="text.primary" fontWeight="600" mr={2}>
-                    {isLoading ? <CircularProgress size="1rem" /> : cartProduct?.quantity}
-                  </Box>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    sx={{
-                      padding: "3px",
-                      marginRight: "20px"
-                    }}
-                    onClick={(e) => handleChangeQtyCarts((cartProduct?.quantity ?? 0) + 1)}
-                  >
-                    <Add fontSize="small" />
-                  </Button>
-                </Fragment>
-              </>
+              justifyContent={
+                !!cartProduct?.quantity ? "space-between" : "flex-start"
               }
+            >
+              {!cartProduct ? (
+                <>
+                  {type == "simple" ? (
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      sx={{
+                        padding: "3px",
+                        marginRight: "20px",
+                      }}
+                      onClick={() => {
+                        handleAddProductIntoCarts(id, 1);
+                      }}
+                    >
+                      {isLoading ? (
+                        <CircularProgress size="1rem" />
+                      ) : (
+                        <Add fontSize="small" />
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      style={{
+                        width: "70px",
+                        height: "35x",
+                        marginRight: "30px",
+                      }}
+                      onClick={() => {
+                        ViewSlug(`/product/${slug}`);
+                      }}
+                    >
+                      view
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <>
+                  <Fragment>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      sx={{
+                        padding: "3px",
+                        marginRight: "20px",
+                      }}
+                      onClick={(e) =>
+                        handleChangeQtyCarts((cartProduct?.quantity ?? 0) - 1)
+                      }
+                    >
+                      <Remove fontSize="small" />
+                    </Button>
+                    <Box color="text.primary" fontWeight="600" mr={2}>
+                      {isLoading ? (
+                        <CircularProgress size="1rem" />
+                      ) : (
+                        cartProduct?.quantity
+                      )}
+                    </Box>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      sx={{
+                        padding: "3px",
+                        marginRight: "20px",
+                      }}
+                      onClick={(e) =>
+                        handleChangeQtyCarts((cartProduct?.quantity ?? 0) + 1)
+                      }
+                    >
+                      <Add fontSize="small" />
+                    </Button>
+                  </Fragment>
+                </>
+              )}
             </FlexBox>
           </FlexBox>
         </Grid>
       </Grid>
-
     </Wrapper>
   );
 };

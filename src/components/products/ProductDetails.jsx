@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { lazy, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Button,
@@ -19,17 +19,14 @@ import {
 } from "../../redux/action.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Add, Remove, Star } from "@mui/icons-material";
-const ProductViewDialog = dynamic(
-  () => import("components/products/ProductViewDialog"),
-  { ssr: false }
-);
+const ProductViewDialog = lazy(
+  () => import("components/products/ProductViewDialog"));
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SparklesIcon from "@mui/icons-material/AutoAwesome";
 import { api } from "utils/axiosInstance";
-import dynamic from "next/dynamic";
 import { displaySnackBar } from "common/snackBar";
 
 const ProductDetails = ({ product, setSelectedVariant, selectedVariant }) => {

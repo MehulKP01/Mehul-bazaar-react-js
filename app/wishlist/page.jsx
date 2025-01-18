@@ -1,29 +1,24 @@
 "use client";
 
-import { memo, useEffect, useState } from "react";
+import { lazy, memo, useEffect, useState } from "react";
 import { Button, Grid, Pagination } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
-const SEO = dynamic(() => import("../../src/components/SEO"), { ssr: false });
+const SEO = lazy(() => import("../../src/components/SEO"));
 import { FlexBox } from "../../src/components/flex-box";
-const ProductCard1 = dynamic(
-  () => import("../../src/components/product-cards/ProductCard1"),
-  { ssr: false }
+const ProductCard1 = lazy(() =>
+  import("../../src/components/product-cards/ProductCard1")
 );
-const UserDashboardHeader = dynamic(
-  () => import("../../src/components/header/UserDashboardHeader"),
-  { ssr: false }
+const UserDashboardHeader = lazy(() =>
+  import("../../src/components/header/UserDashboardHeader")
 );
-const CustomerDashboardLayout = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard"),
-  { ssr: false }
+const CustomerDashboardLayout = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard")
 );
-const CustomerDashboardNavigation = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard/Navigations"),
-  { ssr: false }
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard/Navigations")
 );
 import { useDispatch, useSelector } from "react-redux";
 import { getWishlistProducts } from "../../src/redux/action.js";
-import dynamic from "next/dynamic.js";
 
 const WishList = () => {
   const [currentPage, setCurrentPage] = useState(1);

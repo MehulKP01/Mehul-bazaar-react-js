@@ -10,17 +10,13 @@ import {
   InputAdornment,
 } from "@mui/material";
 
-const LocalOfferIcon = dynamic(() => import("@mui/icons-material/LocalOffer"), {
-  ssr: false,
-});
+const LocalOfferIcon = lazy(() => import("@mui/icons-material/LocalOffer"));
 
-const DeleteOutlineIcon = dynamic(
-  () => import("@mui/icons-material/DeleteOutline"),
-  { ssr: false }
+const DeleteOutlineIcon = lazy(() =>
+  import("@mui/icons-material/DeleteOutline")
 );
 
-import React, { memo } from "react";
-import dynamic from "next/dynamic";
+import React, { lazy } from "react";
 import { currencyFormat } from "../../lib";
 import { useSelector } from "react-redux";
 
@@ -41,8 +37,8 @@ const CheckoutSection = ({
   removeCouponCode,
   convertedAmount,
 }) => {
-    const currency = useSelector((state) => state?.shop?.currency);
-    
+  const currency = useSelector((state) => state?.shop?.currency);
+
   return (
     <Grid item md={4} xs={12}>
       <Card sx={{ padding: 3 }}>

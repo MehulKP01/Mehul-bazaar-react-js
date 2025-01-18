@@ -1,16 +1,16 @@
 "use client";
 
-import { memo, useEffect, useState } from "react";
+import { lazy, memo, useEffect, useState } from "react";
 import Link from "next/link";
-import { Avatar, Box, Skeleton, Typography } from "@mui/material";
-import BazaarCard from "components/BazaarCard";
+import { Box, Skeleton, Typography } from "@mui/material";
+const BazaarCard = lazy(()=> import("components/BazaarCard"));
 import { FlexBox } from "components/flex-box";
 import HoverBox from "components/HoverBox";
 import LazyImage from "components/LazyImage";
 import GiftBox from "components/icons/GiftBox";
 import useWindowSize from "hooks/useWindowSize";
-import Carousel from "../../components/carousel/Carousel";
-import CategorySectionCreator from "components/CategorySectionCreator";
+const Carousel = lazy(()=> import("../../components/carousel/Carousel"));
+const CategorySectionCreator = lazy(()=> import("components/CategorySectionCreator"));
 import { calculateDiscount, currencyFormat, getMediaPath } from "lib";
 import { useSelector } from "react-redux";
 import { isValidArray } from "common/validation";

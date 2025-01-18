@@ -1,22 +1,16 @@
 
-import React, { Fragment, useEffect, useState, useCallback, memo } from "react";
+import React, { Fragment, useEffect, useState, useCallback, lazy } from "react";
 import { Grid, Pagination, CircularProgress, Box } from "@mui/material";
 import { FlexBetween } from "components/flex-box";
-const ProductCard4 = dynamic(()=> import("components/product-cards/ProductCard4"),{ssr : false});
+const ProductCard4 = lazy(()=> import("components/product-cards/ProductCard4"));
 import { Span } from "components/Typography";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../../../src/redux/action";
 import { useRouter, useSearchParams } from "next/navigation";
-const SEO =  dynamic(()=> import("../../components/SEO"),{ssr : false})
-import dynamic from "next/dynamic";
+const SEO =  lazy(()=> import("../../components/SEO"))
 
 const ProductList1 = ({ products, handleChangePage, page }) => {
 
-// console.log("🚀 ~ ProductList1 ~ page:", page)
-// console.log("🚀 ~ ProductList1 ~ products:", products)
-
-  
-  
   const router = useRouter();
   const params = useSearchParams()
   const dispatch = useDispatch();
@@ -105,13 +99,13 @@ const ProductList1 = ({ products, handleChangePage, page }) => {
             <p>No Products Found</p>
           )}
         </Span>
-        {/* <Pagination
+        <Pagination
           variant="outlined"
           color="primary"
           onChange={handleChangePage}
           count={Math.ceil(productShopCount / rowsPerPage)}
           page={page + 1}
-        /> */}
+        />
       </FlexBetween>
     </Fragment>
   );

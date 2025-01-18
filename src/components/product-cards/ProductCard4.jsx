@@ -1,21 +1,22 @@
-import { Box, styled, IconButton, Typography, Chip } from "@mui/material";
-import { H3, H5, Span, H6 } from "components/Typography";
+import { Box, styled, IconButton, Chip } from "@mui/material";
+import { H5, H6 } from "components/Typography";
 import HoverBox from "components/HoverBox";
 import { Favorite, RemoveRedEye } from "@mui/icons-material";
-const LazyImage = dynamic(()=> import("components/LazyImage"),{ssr : false});
-const BazaarCard = dynamic(()=> import("components/BazaarCard"),{ssr : false});
+import LazyImage from "components/LazyImage";
+const BazaarCard = lazy(() => import("components/BazaarCard"));
 import { H4, Small } from "components/Typography";
-const BazaarRating = dynamic(()=> import("components/BazaarRating"),{ssr : false});
+const BazaarRating = lazy(() => import("components/BazaarRating"));
 import { FlexRowCenter, FlexBox } from "components/flex-box";
 import { currencyFormat, getMediaPath } from "lib";
-import { useCallback, useMemo, useState } from "react";
+import { lazy, useCallback, useMemo, useState } from "react";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-const ProductViewDialog = dynamic(()=> import("components/products/ProductViewDialog"),{ssr : false});
+const ProductViewDialog = lazy(() =>
+  import("components/products/ProductViewDialog")
+);
 import { addToWishList, removeFromWishlist } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { displaySnackBar } from "common/snackBar";
-import dynamic from "next/dynamic";
 
 // ======================================================
 const StyledBazaarCard = styled(BazaarCard)({
@@ -72,11 +73,11 @@ const ProductCard4 = (props) => {
     if (val) {
       const data = await removeFromWishlist(id);
       setIsWishlist(!isWishlist);
-      displaySnackBar(data?.message,data.status ? "success" : "error" )
+      displaySnackBar(data?.message, data.status ? "success" : "error");
     } else {
       const data = await addToWishList(id);
       setIsWishlist(!isWishlist);
-      displaySnackBar(data?.message,data.status ? "success" : "error")
+      displaySnackBar(data?.message, data.status ? "success" : "error");
     }
   };
 

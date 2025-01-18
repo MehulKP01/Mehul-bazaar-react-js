@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button, Container, styled } from "@mui/material";
 import SEO from "../../src/components/SEO";
-import BazaarCard from "../../src/components/BazaarCard";
+const BazaarCard = lazy(()=> import("../../src/components/BazaarCard"));
 import { H1, Paragraph } from "../../src/components/Typography";
-import ShopLayout1 from "../../src/components/layouts/ShopLayout1";
+import { lazy } from "react";
 
 // custom styled components
 const Wrapper = styled(BazaarCard)({

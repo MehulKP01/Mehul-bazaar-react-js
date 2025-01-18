@@ -3,7 +3,7 @@
 module.exports = {
   // i18n,
   devIndicators: {},
-  experimental: {    forceSwcTransforms: true,  },
+  // experimental: {    forceSwcTransforms: true,  },
   publicRuntimeConfig: {
     // Available on both server and client
     theme: "DEFAULT",

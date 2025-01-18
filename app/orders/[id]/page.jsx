@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { lazy } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation.js";
 import { format } from "date-fns";
@@ -32,13 +32,13 @@ import {
   Paper,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import TableRows from "../../../src/components/TableRow.jsx";
+const TableRows = lazy(()=> import("../../../src/components/TableRow.jsx"));
 import Delivery from "../../../src/components/icons/Delivery.jsx";
 import PackageBox from "../../../src/components/icons/PackageBox.jsx";
 import TruckFilled from "../../../src/components/icons/TruckFilled.jsx";
 import { H5, H6 } from "../../../src/components/Typography";
 import { FlexBetween, FlexBox } from "../../../src/components/flex-box";
-import CustomerDashboardLayout from "../../../src/components/layouts/customer-dashboard";
+const CustomerDashboardLayout = lazy(()=> import("../../../src/components/layouts/customer-dashboard"));
 import useWindowSize from "../../../src/hooks/useWindowSize";
 import { currencyFormat, getMediaPath } from "../../../src/lib.js";
 import { useDispatch, useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, lazy, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Card, styled, Typography } from "@mui/material";
 import {
@@ -12,14 +12,10 @@ import {
 } from "@mui/icons-material";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import { FlexBox } from "components/flex-box";
-const NavLink = dynamic(() => import("components/nav-link/NavLink"), {
-  ssr: false,
-});
+const NavLink = lazy(() => import("components/nav-link/NavLink"));
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/reducers/user.reducer";
 import { orderLengthCount } from "../../../../src/redux/action.js";
-import LogoutIcon from "@mui/icons-material/Logout";
-import dynamic from "next/dynamic";
 
 // custom styled components
 const MainContainer = styled(Card)(({ theme }) => ({

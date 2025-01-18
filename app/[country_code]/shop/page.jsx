@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { lazy, useCallback, useEffect, useState } from "react";
 import { Apps, FilterList, ViewList } from "@mui/icons-material";
 import {
   Box,
@@ -22,15 +22,15 @@ import {
   Typography,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-const Sidenav =  dynamic(()=>import("../../../src/components/Sidenav"),{ssr:false});
+const Sidenav =  lazy(()=>import("../../../src/components/Sidenav"));
 import { FlexBox } from "../../../src/components/flex-box";
 import { Paragraph } from "../../../src/components/Typography";
-const  ProductList1 = dynamic(()=>import( "../../../src/components/products/ProductList1"),{ssr:false});
-const ProductList2 = dynamic(()=>import( "../../../src/components/products/ProductList2"),{ssr:false});
-const ProductFilterCard = dynamic(()=>import( "../../../src/pages-sections/product-details/ProductFilterCard"),{ssr:false});
+const  ProductList1 = lazy(()=>import( "../../../src/components/products/ProductList1"));
+const ProductList2 = lazy(()=>import( "../../../src/components/products/ProductList2"));
+const ProductFilterCard = lazy(()=>import( "../../../src/pages-sections/product-details/ProductFilterCard"));
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../src/redux/action";
-const useMuiTable =  dynamic(()=>import("../../../src/hooks/useMuiTable.js"),{ssr:false});
+import useMuiTable from "../../../src/hooks/useMuiTable.js";
 import InfoIcon from "@mui/icons-material/Info";
 import ClearIcon from "@mui/icons-material/Clear";
 import { api } from "../../../src/utils/axiosInstance.js";
@@ -42,7 +42,6 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import dynamic from "next/dynamic.js";
 import { displaySnackBar } from '../../../src/common/snackBar.js'
 
 const ShopPage = () => {
@@ -68,8 +67,6 @@ const ShopPage = () => {
     listData: products,
     isLimitedData: true,
   });
-
-  console.log("🚀 ~ ShopPage ~ page:", page)
   
   const firstOption = sortOptions?.find((option) => option);
 

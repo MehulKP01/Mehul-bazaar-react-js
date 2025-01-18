@@ -1,39 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Box, Container, Skeleton, styled, Tab, Tabs } from "@mui/material";
-const ProductIntro = dynamic(
-  () => import("../../../../src/pages-sections/product-details/ProductIntro"),
-  { ssr: false }
+const ProductIntro = lazy(() =>
+  import("../../../../src/pages-sections/product-details/ProductIntro")
 );
-const ProductReview = dynamic(
-  () => import("../../../../src/pages-sections/product-details/ProductReview"),
-  { ssr: false }
+const ProductReview = lazy(() =>
+  import("../../../../src/pages-sections/product-details/ProductReview")
 );
-const AvailableShops = dynamic(
-  () => import("../../../../src/pages-sections/product-details/AvailableShops"),
-  { ssr: false }
+const AvailableShops = lazy(() =>
+  import("../../../../src/pages-sections/product-details/AvailableShops")
 );
-const RelatedProducts = dynamic(
-  () =>
-    import("../../../../src/pages-sections/product-details/RelatedProducts"),
-  { ssr: false }
+const RelatedProducts = lazy(() =>
+  import("../../../../src/pages-sections/product-details/RelatedProducts")
 );
-const FrequentlyBought = dynamic(
-  () =>
-    import("../../../../src/pages-sections/product-details/FrequentlyBought"),
-  { ssr: false }
+const FrequentlyBought = lazy(() =>
+  import("../../../../src/pages-sections/product-details/FrequentlyBought")
 );
-const ProductDescription = dynamic(
-  () =>
-    import("../../../../src/pages-sections/product-details/ProductDescription"),
-  { ssr: false }
+const ProductDescription = lazy(() =>
+  import("../../../../src/pages-sections/product-details/ProductDescription")
 );
-const SEO = dynamic(() => import("../../../../src/components/SEO"), {
-  ssr: false,
-});
-import dynamic from "next/dynamic";
+const SEO = lazy(() => import("../../../../src/components/SEO"));
 import { api } from "../../../../src/utils/axiosInstance";
 
 // styled component
@@ -48,8 +36,6 @@ const StyledTabs = styled(Tabs)(({ theme }) => ({
     textTransform: "capitalize",
   },
 }));
-
-
 
 const ProductDetails = () => {
   //   const {  slug, product,relatedProducts,setting } = props;
@@ -149,7 +135,7 @@ const ProductDetails = () => {
           <AvailableShops product={productData} />
 
           {/* {relatedProducts && <RelatedProducts productsData={relatedProducts} />} */}
-          
+
         </>
       ) : (
         <>

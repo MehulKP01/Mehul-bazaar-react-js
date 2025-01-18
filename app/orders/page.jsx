@@ -15,31 +15,25 @@ import {
 } from "@mui/material";
 
 import { ShoppingBag } from "@mui/icons-material";
-const TableRow = dynamic(() => import("../../src/components/TableRow"), {
-  ssr: false,
-});
+const TableRow = lazy(() => import("../../src/components/TableRow"));
 import { FlexBox } from "../../src/components/flex-box";
-const OrderRow = dynamic(
-  () => import("../../src/pages-sections/orders/OrderRow"),
-  { ssr: false }
+const OrderRow = lazy(() =>
+  import("../../src/pages-sections/orders/OrderRow")
 );
-const UserDashboardHeader = dynamic(
-  () => import("../../src/components/header/UserDashboardHeader"),
-  { ssr: false }
+const UserDashboardHeader = lazy(() =>
+  import("../../src/components/header/UserDashboardHeader")
 );
-const CustomerDashboardLayout = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard"),
-  { ssr: false }
+const CustomerDashboardLayout = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard")
 );
-const CustomerDashboardNavigation = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard/Navigations"),
-  { ssr: false }
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard/Navigations")
 );
+
 import { getAllOrders } from "../../src/redux/action.js";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation.js";
-import dynamic from "next/dynamic.js";
 
 const Orders = () => {
   const dispatch = useDispatch();

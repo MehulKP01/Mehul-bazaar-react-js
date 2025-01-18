@@ -23,7 +23,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { FlexBetween } from "components/flex-box/index.js";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import dynamic from "next/dynamic.js";
 import { displaySnackBar } from "common/snackBar.js";
 
 const validationSchema = yup.object({

@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 
 import { Add, Clear, Close, Remove } from "@mui/icons-material";
-import LazyImage from "components/LazyImage";
+const LazyImage = lazy(()=> import("components/LazyImage"));
 import { FlexBetween, FlexBox } from "components/flex-box";
 import { H5, Paragraph, Tiny } from "components/Typography";
 import CartBag from "components/icons/CartBag";
 import { currencyFormat, getMediaPath } from "lib";
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import React, { lazy, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeQuantityInCart,

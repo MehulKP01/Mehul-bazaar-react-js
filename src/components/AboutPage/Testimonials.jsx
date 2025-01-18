@@ -13,11 +13,8 @@ import {
 } from "@mui/material";
 
 import { testimonials } from "../../common/staticData";
-import dynamic from "next/dynamic";
 
-const BazaarImage = dynamic(() => import("../../components/BazaarImage.jsx"), {
-  ssr: false,
-});
+import BazaarImage from "../../components/BazaarImage.jsx";
 
 const Testimonials = () => {
   const theme = useTheme();

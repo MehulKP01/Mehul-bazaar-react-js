@@ -1,11 +1,11 @@
 "use client"
 
-import { Fragment, useCallback, useState } from "react";
-import Sticky from "../../components/Sticky";
-import Topbar from "../../components/Topbar";
+import { Fragment, lazy, useCallback, useState } from "react";
+const Sticky = lazy(()=> import("../../components/Sticky"));
+const Topbar = lazy(()=> import("../../components/Topbar"));
 import { Footer1 } from "../../components/footer";
-import Header from "../../components/header/Header";
-import Navbar from "../../components/navbar/Navbar";
+const Header = lazy(()=> import("../../components/header/Header"));
+const Navbar = lazy(()=> import("../../components/navbar/Navbar"));
 import { MobileNavigationBar } from "../../components/mobile-navigation";
 import SearchInputWithCategory from "../../components/search-box/SearchInputWithCategory";
 

@@ -36,16 +36,6 @@ const Refund = (props) => {
     setOpen(false);
   };
 
-//   useEffect(() => {
-//     var currentDate = new Date();
-//     var oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-//     const oneWeek = Math.floor(oneWeekAgo.getTime() / 1000);
-//     const placeDate = Date.parse(orderId?.createdAt);
-//     if (oneWeek < placeDate) {
-//       // console.log("timestamp11", placeDate)
-//     }
-//   }, []);
-
   const handleRefundChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevState) => ({

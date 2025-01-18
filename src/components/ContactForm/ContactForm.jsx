@@ -1,18 +1,12 @@
-import React, { memo, useRef } from "react";
+import React, { memo } from "react";
 
 import { Box, Grid, TextField, Typography, Button, Alert } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import dynamic from "next/dynamic.js";
-const PhoneInput = dynamic(() => import("react-phone-input-2"), { ssr: false });
-const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
-  ssr: false,
-});
-const BazaarImage = dynamic(
-  () => import("components/BazaarImage.jsx"),
-  { ssr: false }
-);
+import PhoneInput from "react-phone-input-2";
+import ReCAPTCHA from "react-google-recaptcha";
+import BazaarImage from "components/BazaarImage.jsx";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -57,7 +51,7 @@ const ContactForm = ({
   handleChange,
   handlePhoneChange,
   handleRecaptchaChange,
-  recaptchaRef
+  recaptchaRef,
 }) => {
   const classes = useStyles();
   const siteKey = "6LdxU7QpAAAAADkyc3j87YXJWo0FI39k9_bZpHrc";

@@ -1,13 +1,12 @@
 "use client"
 
 import Link from "next/link";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import {
     Badge,
     Box,
     Button,
     Dialog,
-    DialogContent,
     Drawer,
     Menu,
     Typography,
@@ -21,7 +20,6 @@ import { Clear, PersonOutline } from "@mui/icons-material";
 import clsx from "clsx";
 import Icon from "components/icons";
 import { layoutConstant } from "utils/constants";
-import Login from "pages-sections/sessions/Login";
 import Image from "components/BazaarImage";
 import MiniCart from "components/MiniCart";
 import { FlexBetween, FlexBox } from "components/flex-box";
@@ -32,7 +30,6 @@ import { MenuItem } from "@mui/material";
 import { H6 } from "components/Typography";
 import { getMediaPath } from "lib";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Popover } from "@mui/material";
 import { api } from "../../utils/axiosInstance";
 import { getCookie, setCookie } from "cookies-next";
 import LoginModel from "pages-sections/sessions/LoginModel";

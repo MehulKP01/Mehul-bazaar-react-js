@@ -2,11 +2,12 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { East } from "@mui/icons-material";
 import { Box, Chip, IconButton, Typography, useMediaQuery } from "@mui/material";
-import TableRow from "components/TableRow";
+const TableRow = lazy(()=> import("components/TableRow"));
 import { H5 } from "components/Typography";
 import { currencyFormat } from "lib";
 import { useSelector } from "react-redux";
 import { useTheme } from "@mui/material/styles";
+import { lazy } from "react";
 // =================================================
 
 const OrderRow = ({ order,serialNumber  }) => {

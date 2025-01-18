@@ -1,4 +1,4 @@
-import { Button, Grid, styled } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 import BazaarImage from "../../components/BazaarImage";
 import { FlexBetween } from "../../components/flex-box";
 import { Paragraph } from "../../components/Typography";

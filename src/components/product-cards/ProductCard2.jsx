@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, lazy, useCallback, useEffect, useMemo, useState } from "react";
 import { Add, Favorite, Remove, RemoveRedEye } from "@mui/icons-material";
 import {
-  Avatar,
   Box,
   Button,
   Chip,
@@ -10,14 +9,13 @@ import {
   IconButton,
   styled,
   Tooltip,
-  Typography,
 } from "@mui/material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import LazyImage from "components/LazyImage";
 import BazaarCard from "components/BazaarCard";
 import { H3, H5, Span, H6 } from "components/Typography";
-import BazaarRating from "components/BazaarRating";
-import ProductViewDialog from "components/products/ProductViewDialog";
+const BazaarRating = lazy(()=> import("components/BazaarRating"));
+const ProductViewDialog = lazy(()=> import("components/products/ProductViewDialog"));
 import { FlexBox } from "../flex-box";
 import {
   calculateDiscountPercentage,

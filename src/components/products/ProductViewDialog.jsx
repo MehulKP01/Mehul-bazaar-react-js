@@ -11,14 +11,17 @@ import {
   Tabs,
   Tab,
 } from "@mui/material";
-const BazaarImage = dynamic(()=> import("../../components/BazaarImage"),{ssr : false});
-const Carousel = dynamic(()=> import("../../components/carousel/Carousel"),{ssr : false});
-import {  getMediaPath } from "../../lib";
-import {  useEffect, useMemo, useState } from "react";
-const ProductDialogDetails =  dynamic (()=> import("./ProductDialogDetails"),{ssr : false});
-const ProductSpecification =  dynamic (()=> import("pages-sections/product-details/ProductSpecification"),{ssr : false});
-const ProductDescription =  dynamic (()=> import("pages-sections/product-details/ProductDescription"),{ssr : false});
-import dynamic from "next/dynamic";
+import BazaarImage from "../../components/BazaarImage";
+const Carousel = lazy(() => import("../../components/carousel/Carousel"));
+import { getMediaPath } from "../../lib";
+import { lazy, useEffect, useMemo, useState } from "react";
+const ProductDialogDetails = lazy(() => import("./ProductDialogDetails"));
+const ProductSpecification = lazy(() =>
+  import("pages-sections/product-details/ProductSpecification")
+);
+const ProductDescription = lazy(() =>
+  import("pages-sections/product-details/ProductDescription")
+);
 
 // styled components
 const ContentWrapper = styled(Box)(({ theme }) => ({

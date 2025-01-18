@@ -91,4 +91,4 @@ const useMuiTable = (props) => {
     handleSelectAllClick,
   };
 };
-export default memo(useMuiTable);
+export default useMuiTable;

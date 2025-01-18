@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Add, Remove, Star } from "@mui/icons-material";
 import {
     Box,
@@ -21,11 +21,10 @@ import {
     addProductIntoCart,
     changeQuantityInCart,
 } from "../../../src/redux/action";
-const ShoppingCartOutlinedIcon = dynamic(()=> import("@mui/icons-material/ShoppingCartOutlined"),{ssr : false});
-const ShoppingBagOutlinedIcon = dynamic(()=> import("@mui/icons-material/ShoppingBagOutlined"),{ssr : false});
+const ShoppingCartOutlinedIcon = lazy(()=> import("@mui/icons-material/ShoppingCartOutlined"));
+const ShoppingBagOutlinedIcon = lazy(()=> import("@mui/icons-material/ShoppingBagOutlined"));
 import { useRouter } from "next/navigation";
 import { displaySnackBar } from "common/snackBar";
-import dynamic from "next/dynamic";
 
 // styled components
 

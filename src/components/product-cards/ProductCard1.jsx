@@ -2,6 +2,7 @@
 
 import {
   Fragment,
+  lazy,
   memo,
   useCallback,
   useEffect,
@@ -18,19 +19,12 @@ import {
   styled,
 } from "@mui/material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-const LazyImage = dynamic(() => import("../../components/LazyImage"), {
-  ssr: false,
-});
-const BazaarCard = dynamic(() => import("../../components/BazaarCard"), {
-  ssr: false,
-});
+import LazyImage from  "../../components/LazyImage";
+const BazaarCard = lazy(() => import("../../components/BazaarCard"));
 import { H3, H5, Span, H6 } from "../../components/Typography";
-const BazaarRating = dynamic(() => import("../../components/BazaarRating"), {
-  ssr: false,
-});
-const ProductViewDialog = dynamic(
-  () => import("../../components/products/ProductViewDialog"),
-  { ssr: false }
+const BazaarRating = lazy(() => import("../../components/BazaarRating"));
+const ProductViewDialog = lazy(() =>
+  import("../../components/products/ProductViewDialog")
 );
 import { FlexBox } from "../flex-box";
 import { calculateDiscountPercentage, currencyFormat } from "lib";
@@ -44,7 +38,6 @@ import {
   removeFromWishlist,
 } from "../../redux/action";
 import { removeWhishlistProducts } from "../../../src/redux/reducers/shop.reducer";
-import dynamic from "next/dynamic";
 import { displaySnackBar } from "common/snackBar";
 
 // styled components
@@ -113,7 +106,6 @@ const ContentWrapper = styled(Box)({
   },
 });
 
-
 const ProductCard1 = (props) => {
   const { hoverEffect, product } = props;
   const {
@@ -150,18 +142,18 @@ const ProductCard1 = (props) => {
       setIsWishlist(!isWishlist);
       if (data?.status) {
         dispatch(removeWhishlistProducts(id));
-        displaySnackBar(data?.message,"success","bottom","right")
+        displaySnackBar(data?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+        displaySnackBar(data?.message, "error", "bottom", "right");
       }
     } else {
       const data = await addToWishList(id);
       setIsWishlist(!isWishlist);
 
       if (data?.status) {
-        displaySnackBar(data?.message,"success","bottom","right")
+        displaySnackBar(data?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+        displaySnackBar(data?.message, "error", "bottom", "right");
       }
     }
   };
@@ -180,14 +172,19 @@ const ProductCard1 = (props) => {
       const response = await dispatch(addProductIntoCart(id, variationId, qty)); // Assuming 1 quantity for now, modify as needed
       // Show success message
       if (response?.status) {
-        displaySnackBar(response?.message,"success","bottom","right")
+        displaySnackBar(response?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(response?.message,"success","bottom","right")
+        displaySnackBar(response?.message, "success", "bottom", "right");
       }
     } catch (error) {
       // Handle error
       setIsLoading(false);
-      displaySnackBar("Failed to add product to cart","error","bottom","right")
+      displaySnackBar(
+        "Failed to add product to cart",
+        "error",
+        "bottom",
+        "right"
+      );
     }
   };
 
@@ -201,15 +198,15 @@ const ProductCard1 = (props) => {
         );
         // Show success message
         if (response?.status) {
-        displaySnackBar(response?.message,"success","bottom","right")
+          displaySnackBar(response?.message, "success", "bottom", "right");
         } else {
-        displaySnackBar(response?.message,"error","bottom","right")
+          displaySnackBar(response?.message, "error", "bottom", "right");
         }
       } else {
-        displaySnackBar("No product found in cart","error","bottom","right")
+        displaySnackBar("No product found in cart", "error", "bottom", "right");
       }
     } catch (error) {
-      displaySnackBar("Failed to update quantity","error","bottom","right")
+      displaySnackBar("Failed to update quantity", "error", "bottom", "right");
     }
   };
 
@@ -320,7 +317,7 @@ const ProductCard1 = (props) => {
             priority
             src={getMediaPath(image?.url)}
             width={500}
-            height={500}
+          height={500}
             alt={name}
           />
           {/* )} */}

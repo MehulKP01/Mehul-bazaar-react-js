@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-const ExpandMoreIcon =  dynamic(()=> import("@mui/icons-material/ExpandMore"));
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Accordion,
@@ -13,16 +13,13 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-const LiveHelpIcon = dynamic(() => import("@mui/icons-material/LiveHelp"), {
-  ssr: false,
-});
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 const useStyles = makeStyles((theme) => ({
   accordion: {
     marginBottom: theme.spacing(2),
   },
 }));
 import { faqData } from "../../src/common/staticData";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 
 const faqs = () => {

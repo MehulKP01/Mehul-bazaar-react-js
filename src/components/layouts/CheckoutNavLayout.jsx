@@ -1,9 +1,8 @@
 "use client"
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Box, Container, Grid } from "@mui/material";
-const Stepper = dynamic(()=> import("../../components/Stepper"),{ssr:false});
-import dynamic from "next/dynamic";
+const Stepper = lazy(()=> import("../../components/Stepper"));
 
 /**
  *  Used:

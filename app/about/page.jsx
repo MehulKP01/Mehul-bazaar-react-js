@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { lazy } from "react";
 import {
   Box,
   Container,
@@ -10,35 +10,18 @@ import {
   useTheme,
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
-import dynamic from "next/dynamic.js";
 
-const BazaarImage = dynamic(
-  () => import("../../src/components/BazaarImage.jsx"),
-  { ssr: false }
-);
-const InfoOutlinedIcon = dynamic(
-  () => import("@mui/icons-material/InfoOutlined"),
-  { ssr: false }
-);
-const NotStartedIcon = dynamic(() => import("@mui/icons-material/NotStarted"), {
-  ssr: false,
-});
-const CheckCircleIcon = dynamic(
-  () => import("@mui/icons-material/CheckCircle"),
-  { ssr: false }
-);
-const CircularProgressWithLabel = dynamic(
-  () => import("@mui/material/CircularProgress"),
-  { ssr: false }
-);
+import BazaarImage from "../../src/components/BazaarImage.jsx";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import NotStartedIcon from "@mui/icons-material/NotStarted";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircularProgressWithLabel from "@mui/material/CircularProgress"
 
-const Testimonials = dynamic(
-  () => import("../../src/components/AboutPage/Testimonials.jsx"),
-  { ssr: false }
+const Testimonials = lazy(() =>
+  import("../../src/components/AboutPage/Testimonials.jsx")
 );
-const GlobalRatings = dynamic(
-  () => import("../../src/components/AboutPage/GlobalRatings.jsx"),
-  { ssr: false }
+const GlobalRatings = lazy(() =>
+  import("../../src/components/AboutPage/GlobalRatings.jsx")
 );
 
 const useStyles = makeStyles((theme) => ({
@@ -91,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 
 const About = () => {
   const classes = useStyles();
-
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -229,7 +211,7 @@ const About = () => {
       </Container>
 
       <GlobalRatings />
-      
+
       <Container>
         <Grid container spacing={10} my={1}>
           <Grid item lg={6} md={6} sm={6} xs={12}>

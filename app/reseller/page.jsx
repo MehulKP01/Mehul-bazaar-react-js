@@ -1,6 +1,6 @@
 "use client"
 
-import React, { memo } from "react";
+import React, { lazy } from "react";
 import {
   Box,
   Container,
@@ -19,9 +19,8 @@ import InstallDesktopIcon from "@mui/icons-material/InstallDesktop";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import dynamic from "next/dynamic";
-const ResellerFeature = dynamic(()=> import ('../../src/components/reseller/ResellerFeature'),{ ssr: false })
-const ResellerFeature2 = dynamic(()=> import ('../../src/components/reseller/ResellerFeature2'),{ ssr: false })
+const ResellerFeature = lazy(()=> import ('../../src/components/reseller/ResellerFeature'))
+const ResellerFeature2 = lazy(()=> import ('../../src/components/reseller/ResellerFeature2'))
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }

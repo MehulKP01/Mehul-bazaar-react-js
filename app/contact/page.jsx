@@ -1,37 +1,27 @@
 "use client";
 
-import React, { memo, useRef, useState } from "react";
+import React, { lazy, useRef, useState } from "react";
 import Link from "next/link";
 
 import { Box, Container, Grid, Typography } from "@mui/material";
 
-const LocalPhoneIcon = dynamic(() => import("@mui/icons-material/LocalPhone"), {
-  ssr: false,
-});
-const MarkunreadOutlinedIcon = dynamic(
-  () => import("@mui/icons-material/MarkunreadOutlined"),
-  { ssr: false }
-);
-const LocationOnOutlinedIcon = dynamic(
-  () => import("@mui/icons-material/LocationOnOutlined"),
-  { ssr: false }
-);
+import LocalPhoneIcon from  '@mui/icons-material/LocalPhone';
+import MarkunreadOutlinedIcon from "@mui/icons-material/MarkunreadOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined"; 
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
-
-const ContactForm = dynamic(() =>
-  import("../../src/components/ContactForm/ContactForm.jsx"), {ssr:false}
+const ContactForm = lazy(() =>
+  import("../../src/components/ContactForm/ContactForm.jsx")
 );
 
 import { displaySnackBar } from "../../src/common/snackBar.js";
 
 import { useTheme } from "@emotion/react";
 import { api } from "../../src/utils/axiosInstance.js";
-import dynamic from "next/dynamic.js";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

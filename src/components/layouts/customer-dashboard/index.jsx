@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { Container, Grid } from "@mui/material";
-import dynamic from "next/dynamic";
-const Navigations =  dynamic(()=> import("./Navigations"),{ssr:false});
+import { lazy } from "react";
+const Navigations = lazy(() => import("./Navigations"));
 
 /**
  *  Used in:
@@ -18,31 +18,31 @@ const Navigations =  dynamic(()=> import("./Navigations"),{ssr:false});
 // ======================================================
 
 const CustomerDashboardLayout = ({ children }) => (
-    <Container
-      sx={{
-        my: "2rem",
-      }}
-    >
-      <Grid container spacing={3}>
-        <Grid
-          item
-          lg={3}
-          xs={12}
-          sx={{
-            display: {
-              xs: "none",
-              sm: "none",
-              md: "block",
-            },
-          }}
-        >
-          <Navigations />
-        </Grid>
-
-        <Grid item lg={9} xs={12}>
-          {children}
-        </Grid>
+  <Container
+    sx={{
+      my: "2rem",
+    }}
+  >
+    <Grid container spacing={3}>
+      <Grid
+        item
+        lg={3}
+        xs={12}
+        sx={{
+          display: {
+            xs: "none",
+            sm: "none",
+            md: "block",
+          },
+        }}
+      >
+        <Navigations />
       </Grid>
-    </Container>
+
+      <Grid item lg={9} xs={12}>
+        {children}
+      </Grid>
+    </Grid>
+  </Container>
 );
 export default CustomerDashboardLayout;

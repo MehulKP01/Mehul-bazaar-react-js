@@ -11,25 +11,24 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-const Accordion = dynamic(()=> import("../../components/accordion/Accordion"),{ssr : false});
+const Accordion = lazy(()=> import("../../components/accordion/Accordion"));
 import { FlexBetween } from "components/flex-box";
 import { H5, H6, H3, Span } from "components/Typography";
-const AccordionHeader = dynamic(()=> import("../../components/accordion/AccordionHeader"),{ssr : false});
+const AccordionHeader = lazy(()=> import("../../components/accordion/AccordionHeader"));
 import { useDispatch, useSelector } from "react-redux";
 import {
   getbrandfilterall,
   getproductcategory,
   getAllProducts,
 } from "../../redux/action.js";
-import { memo, useEffect, useState } from "react";
+import { lazy, memo, useEffect, useState } from "react";
 import {
   useParams,
   usePathname,
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import dynamic from "next/dynamic.js";
-const Image = dynamic(()=> import("next/image.js"),{ssr: false});
+import Image from "next/image.js";
 
 const ProductFilterCard = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);

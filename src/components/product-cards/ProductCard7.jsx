@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Add, Close, Remove } from "@mui/icons-material";
 import {
-  Avatar,
   Box,
   Button,
   IconButton,

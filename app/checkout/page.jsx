@@ -1,11 +1,11 @@
 "use client"
 
 import { Grid } from "@mui/material";
-import dynamic from "next/dynamic";
-const SEO = dynamic(()=> import("../../src/components/SEO"),{ssr : false});
-const CheckoutForm = dynamic(()=> import("../../src/pages-sections/checkout/CheckoutForm"),{ssr : false}) ;
-const CheckoutNavLayout = dynamic(()=> import("../../src/components/layouts/CheckoutNavLayout"),{ssr : false}) ;
-const CheckoutSummary = dynamic(()=> import("../../src/pages-sections/checkout/CheckoutSummary"),{ssr : false}) ;
+import { lazy } from "react";
+const SEO = lazy(()=> import("../../src/components/SEO"));
+const CheckoutForm = lazy(()=> import("../../src/pages-sections/checkout/CheckoutForm")) ;
+const CheckoutNavLayout = lazy(()=> import("../../src/components/layouts/CheckoutNavLayout")) ;
+const CheckoutSummary = lazy(()=> import("../../src/pages-sections/checkout/CheckoutSummary")) ;
 
 
 const Checkout = () => {

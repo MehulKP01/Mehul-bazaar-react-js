@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, lazy, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -50,7 +50,6 @@ const FrequentlyBought = ({ product, boughtFrequently }) => {
   const selectedData = shortData.products.filter((p) =>
     selectedProducts.includes(p.productId._id)
   );
-
 
   const handleProductSelection = (id) => {
     setSelectedProducts((prevSelected) =>
@@ -181,7 +180,6 @@ const FrequentlyBought = ({ product, boughtFrequently }) => {
         };
       }),
     };
-
 
     try {
       const response = await api.post("/order/cart/add-product", payload);

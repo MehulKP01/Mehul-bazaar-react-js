@@ -2,23 +2,19 @@
 
 import { CardGiftcard } from "@mui/icons-material";
 import { CircularProgress, Pagination } from "@mui/material";
-const UserDashboardHeader = dynamic(
-  () => import("../../src/components/header/UserDashboardHeader"),
-  { ssr: false }
+const UserDashboardHeader = lazy(() =>
+  import("../../src/components/header/UserDashboardHeader")
 );
-const CustomerDashboardLayout = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard"),
-  { ssr: false }
+const CustomerDashboardLayout = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard")
 );
-const CustomerDashboardNavigation = dynamic(
-  () => import("../../src/components/layouts/customer-dashboard/Navigations"),
-  { ssr: false }
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard/Navigations")
 );
 import { Box, Typography, Card, styled } from "@mui/material";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { api } from "../../src/utils/axiosInstance";
 import { useTheme, useMediaQuery } from "@mui/material";
-import dynamic from "next/dynamic";
 
 const HistoryContainer = styled(Box)({
   marginTop: "20px",

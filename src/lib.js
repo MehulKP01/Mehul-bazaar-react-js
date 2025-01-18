@@ -1,12 +1,7 @@
-// import getConfig from "next/config";
+
 import ceil from "lodash/ceil";
 import { differenceInMinutes } from "date-fns";
 import currencyJs from "currency.js";
-
-// import cookie from "cookie";
-// import jwt from "jsonwebtoken";
-
-// const secret = "my-secret";
 
 /**
  * GET THE DIFFERENCE DATE FORMAT
@@ -53,14 +48,6 @@ function renderProductCount(page, perPageProduct, totalProduct) {
  * @returns - RETURN NEW PRICE
  */
 
-// function calculateDiscount(price, discount, quantity,currency) {
-//   const afterDiscount = Number((price - price * (discount / 100)).toFixed(2));
-//   if (quantity,currency) {
-//     return currencyFormat(afterDiscount * quantity,currency);
-//   } else {
-//     return currencyFormat(afterDiscount,currency);
-//   }
-// }
 function calculateDiscount(price, discount, quantity, currency) {
   const afterDiscount = Number((price - price * (discount / 100)).toFixed(2));
   const totalPrice = quantity ? afterDiscount * quantity : afterDiscount;

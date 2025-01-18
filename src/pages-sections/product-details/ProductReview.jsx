@@ -7,9 +7,9 @@ import {
   Grid,
 } from "@mui/material";
 import { FlexBox } from "components/flex-box";
-import ProductComment from "./ProductComment";
+const ProductComment = lazy(()=> import("./ProductComment"));
 import { H4, H5 } from "components/Typography";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { api } from "../../utils/axiosInstance";
 import { displaySnackBar } from "common/snackBar";

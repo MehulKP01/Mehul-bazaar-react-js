@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import {
   FormControl,
   FormControlLabel,
@@ -9,17 +9,12 @@ import {
 } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import { Box, Button, Grid, TextField } from "@mui/material";
-const Card1 = dynamic(() => import("../../src/components/Card1"), {
-  ssr: false,
-});
+const Card1 = lazy(() => import("../../src/components/Card1"));
 import { Container } from "@mui/material";
-import dynamic from "next/dynamic";
-const PhoneInput = dynamic(() => import("react-phone-input-2"), { ssr: false });
+import PhoneInput from "react-phone-input-2";
 import { countryList } from "../../src/common/countryList.js";
-const UserDashboardHeader = dynamic(
-  () => import("../../src/components/header/UserDashboardHeader.jsx"),
-  { ssr: false }
-);
+const UserDashboardHeader = lazy(
+  () => import("../../src/components/header/UserDashboardHeader.jsx"));
 
 const EditNewAddress = (props) => {
   const {

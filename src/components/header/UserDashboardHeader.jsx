@@ -1,10 +1,9 @@
 import Menu from "@mui/icons-material/Menu";
 import { Box, styled, Typography } from "@mui/material";
-const Sidenav = dynamic(()=>import("components/Sidenav"),{ssr:false});
+const Sidenav = lazy(()=>import("components/Sidenav"));
 import { FlexBox } from "components/flex-box";
 import useWindowSize from "hooks/useWindowSize";
-import dynamic from "next/dynamic";
-import { memo } from "react";
+import { lazy, memo } from "react";
 const StyledBox = styled(Box)(({ theme }) => ({
   display: "flex",
   marginTop: theme.spacing(-2),

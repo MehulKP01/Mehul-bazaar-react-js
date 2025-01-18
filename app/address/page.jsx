@@ -10,16 +10,22 @@ import {
 } from "@mui/material";
 import { Place } from "@mui/icons-material";
 import { IconButton, Pagination } from "@mui/material";
-import TableRow from "../../src/components/TableRow";
+const TableRow = lazy(() => import("../../src/components/TableRow"));
 import { Delete, Edit } from "@mui/icons-material";
-import React from "react";
+import React, { lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import CustomerDashboardLayout from "../../src/components/layouts/customer-dashboard";
+const CustomerDashboardLayout = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard")
+);
 import { Box, Button, Grid } from "@mui/material";
 import { FlexBox } from "../../src/components/flex-box";
-import UserDashboardHeader from "../../src/components/header/UserDashboardHeader";
-import CustomerDashboardNavigation from "../../src/components/layouts/customer-dashboard/Navigations";
+const UserDashboardHeader = lazy(() =>
+  import("../../src/components/header/UserDashboardHeader")
+);
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../src/components/layouts/customer-dashboard/Navigations")
+);
 import { useEffect, useState } from "react";
 import {
   getAddresses,
@@ -31,11 +37,8 @@ import { api } from "../../src/utils/axiosInstance.js";
 import { useTheme } from "@emotion/react";
 import { useRouter } from "next/navigation.js";
 import { displaySnackBar } from "../../src/common/snackBar.js";
-import dynamic from "next/dynamic.js";
-import EditNewAddress from "./EditNewAddress.jsx";
-const AddNewAddress = dynamic(() => import("./AddNewAddress.jsx"), {
-  ssr: false,
-});
+const EditNewAddress = lazy(() => import("./EditNewAddress.jsx"));
+const AddNewAddress = lazy(() => import("./AddNewAddress.jsx"));
 
 const AddressList = () => {
   const router = useRouter();

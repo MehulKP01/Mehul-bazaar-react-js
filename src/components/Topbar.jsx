@@ -7,7 +7,6 @@ import {
   Instagram,
   Remove,
   Twitter,
-  Login,
   YouTube,
 } from "@mui/icons-material"; // Added Login icon
 import {
@@ -199,12 +198,9 @@ const Topbar = ({ bgColor }) => {
                 <ExpandMore fontSize="inherit" />
               </TouchRipple>
             }
-            // sx={{ position: "absolute", left: "4px" }}
           >
             {currencies?.map((item) => (
               <MenuItem
-                // sx={{ width: "10vh", padding: "8px 16px", display: "flex", justifyContent: "space-between" }}
-                // width="100vh"
                 key={item?.id}
                 className="menuItem"
                 onClick={() => onCurrencyChange(item)}

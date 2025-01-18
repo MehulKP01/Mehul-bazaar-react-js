@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { lazy, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -11,25 +11,15 @@ import {
   CircularProgress,
   Alert,
 } from "@mui/material";
-const Card1 = dynamic(() => import("components/Card1"), { ssr: false });
+const Card1 = lazy(() => import("components/Card1"));
 import { useDispatch, useSelector } from "react-redux";
 import { getAddresses, selectAddresses } from "../../../src/redux/action.js";
-const EditAddressForm = dynamic(() => import("./EditAddressForm"), {
-  ssr: false,
-});
-const NewAddressForm = dynamic(() => import("./NewAddressForm.jsx"), {
-  ssr: false,
-});
-const DeleteAddress = dynamic(() => import("./DeleteAddress.jsx"), {
-  ssr: false,
-});
+const EditAddressForm = lazy(() => import("./EditAddressForm"));
+const NewAddressForm = lazy(() => import("./NewAddressForm.jsx"));
+const DeleteAddress = lazy(() => import("./DeleteAddress.jsx"));
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
-const CartMessage = dynamic(
-  () => import("../../../app/cart/CartMessages.jsx"),
-  { ssr: false }
-);
-import dynamic from "next/dynamic.js";
+const CartMessage = lazy(() => import("../../../app/cart/CartMessages.jsx"));
 import { displaySnackBar } from "common/snackBar.js";
 import Image from "next/image.js";
 import {
@@ -45,7 +35,7 @@ const CheckoutForm = () => {
   const addressAll1 = useSelector((state) => state?.user?.addresses);
   const usersDetails = useSelector((state) => state?.user?.updateProfile);
   const paymentAddress = useSelector((state) => state?.user?.paymentAddress);
-  
+
   const userData = useSelector((state) => state?.user);
   const [openEditForm, setOpenEditForm] = useState(false);
   const [selected, setSelected] = useState();
@@ -88,7 +78,7 @@ const CheckoutForm = () => {
         formData.append("user_id", paymentAddress?.userId);
         formData.append("name", paymentAddress?.name);
         formData.append("email", paymentAddress?.email);
-        
+
         const { data } = await api.post("user/profile/save", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -97,8 +87,8 @@ const CheckoutForm = () => {
         if (data?.status) {
           dispatch(setUseProfile(data?.user));
         }
-      } 
-      
+      }
+
       if (selectedAddress) {
         router.push("/payment");
       } else {

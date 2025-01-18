@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { Button, Card, Box, styled, Typography } from "@mui/material";
 import { Link } from "react-scroll";
 import { Formik } from "formik";
 import { H1 } from "components/Typography";
-const BazaarImage = dynamic(() => import("components/BazaarImage"), {
-  ssr: false,
-});
+import BazaarImage from "components/BazaarImage";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loginFailure, loginSuccess } from "../../redux/reducers/user.reducer";
 import { useDispatch, useSelector } from "react-redux";
-import PhoneInput from "react-phone-input-2";
+const PhoneInput = lazy(() => import("react-phone-input-2"));
 import "react-phone-input-2/lib/style.css";
 import { api } from "../../utils/axiosInstance";
 import { MuiOtpInput } from "mui-one-time-password-input";
@@ -19,7 +17,6 @@ import { useMediaQuery } from "@mui/material";
 import { getCookie, setCookie } from "cookies-next";
 import ClearIcon from "@mui/icons-material/Clear";
 import { FlexBetween } from "components/flex-box";
-import dynamic from "next/dynamic";
 import { displaySnackBar } from "common/snackBar";
 
 const fbStyle = {
@@ -127,10 +124,10 @@ const Login = ({ onSuccess, closeModal, isModal = true }) => {
       guest_id: guestId,
     });
 
-    if (data.status) {
-      setCookie("is-guest	", data?.user?.isGuest);
-      setCookie("user	", data?.user);
-      setCookie("auth-token	", data?.token);
+    if (data?.status) {
+      setCookie("is-guest", data?.user?.isGuest);
+      setCookie("user", data?.user);
+      setCookie("auth-token", data?.token);
       setCookie("user-id", data?.user?.id);
       setCookie("guest-id", data?.user?.id);
       dispatch(
@@ -143,9 +140,11 @@ const Login = ({ onSuccess, closeModal, isModal = true }) => {
               : true,
         })
       );
+
       if (typeof onSuccess === "function") {
         onSuccess();
       }
+
       displaySnackBar("Login Success", "success", "top", "right");
     } else {
       dispatch(
@@ -163,6 +162,7 @@ const Login = ({ onSuccess, closeModal, isModal = true }) => {
 
     setLoading(false);
   };
+
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <Wrapper

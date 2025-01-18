@@ -17,9 +17,7 @@ import MuiTheme from "../src/theme/MuiTheme";
 import RTL from "../src/components/RTL";
 import { AppProvider } from "../src/contexts/AppContext";
 import SettingsProvider from "../src/contexts/SettingContext";
-import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import SEO from "../src/components/SEO";
-import CustomLoadingUI from "../src/components/CustomLoading";
 import { useEffect, useState } from "react";
 import store from "../src/redux/store";
 import { getCookie } from "cookies-next";
@@ -32,7 +30,7 @@ import {
 import { getCurrencyData } from "../src//redux/action";
 import { api } from "../src/utils/axiosInstance";
 import ShopLayout1 from "../src/components/layouts/ShopLayout1";
-import Ordersale from "./ordersale/page.jsx"
+import Ordersale from "./ordersale/page.jsx";
 
 // Create Emotion cache
 const clientSideEmotionCache = createEmotionCache();
@@ -40,7 +38,6 @@ const clientSideEmotionCache = createEmotionCache();
 function App({ children }) {
   // const { seo, countryCode, currencies } = app
   const [initialData, setInitialData] = useState({});
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getInitialValues = async () => {
@@ -53,7 +50,7 @@ function App({ children }) {
         user: user ? JSON.parse(user) : null,
       };
       store.dispatch(loginSuccess(data));
-
+  
       const { app } = await getInitialData();
 
       if (app) {
@@ -64,7 +61,7 @@ function App({ children }) {
           store.dispatch(setCurrency(app?.currencies[0]));
         }
       }
-    };  
+    };
 
     getInitialValues();
   }, []);
@@ -77,7 +74,7 @@ function App({ children }) {
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
                 <CacheProvider value={clientSideEmotionCache}>
-                <Ordersale />
+                  <Ordersale />
                   <SEO
                     title="App Title"
                     description="App Description"
@@ -86,14 +83,9 @@ function App({ children }) {
                   <SettingsProvider>
                     <AppProvider>
                       <MuiTheme>
-                        {loading && <CustomLoadingUI />}
-                        <ShopLayout1 >
-                        <RTL>{children}</RTL>
+                        <ShopLayout1>
+                          <RTL>{children}</RTL>
                         </ShopLayout1>
-                        <TawkMessengerReact
-                          propertyId={initialData?.tawkTo?.propertyId || ""}
-                          widgetId={initialData?.tawkTo?.widgetId || ""}
-                        />
                       </MuiTheme>
                     </AppProvider>
                   </SettingsProvider>

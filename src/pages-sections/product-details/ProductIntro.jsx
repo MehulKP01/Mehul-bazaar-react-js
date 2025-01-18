@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, useEffect, useMemo, useState } from "react";
 import {
   Avatar,
   Box,
@@ -18,17 +18,12 @@ import { Favorite } from "@mui/icons-material";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-const ProductDetails = dynamic(
-  () => import("components/products/ProductDetails"),
-  { ssr: false }
-);
-const ProductBundleDetails = dynamic(
-  () => import("components/products/ProductBundleDetails"),
-  { ssr: false }
+import { useParams } from "next/navigation";
+const ProductDetails = lazy(() => import("components/products/ProductDetails"));
+const ProductBundleDetails = lazy(() =>
+  import("components/products/ProductBundleDetails")
 );
 import ReactPlayer from "react-player";
-import dynamic from "next/dynamic.js";
 import { displaySnackBar } from "common/snackBar.js";
 
 const ZoomableImage = styled(Box)(({ theme }) => ({
@@ -48,7 +43,7 @@ const ProductIntro = ({
 
   const [selectedImage, setSelectedImage] = useState(0);
   const setUrlParams = {};
-  const params = useParams()
+  const params = useParams();
 
   const getParamValue = () => {
     for (const key in params) {
@@ -64,21 +59,21 @@ const ProductIntro = ({
       const data = await removeFromWishlist(id);
       if (data?.status) {
         setWishlist(false);
-        displaySnackBar(data?.message,"success","bottom","right")
+        displaySnackBar(data?.message, "success", "bottom", "right");
       } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+        displaySnackBar(data?.message, "error", "bottom", "right");
       }
     } else {
       const data = await addToWishList(id);
       try {
         if (data && data?.status) {
-        displaySnackBar(data?.message,"success","bottom","right")
+          displaySnackBar(data?.message, "success", "bottom", "right");
           setWishlist(true);
         } else {
-        displaySnackBar(data?.message,"error","bottom","right")
+          displaySnackBar(data?.message, "error", "bottom", "right");
         }
       } catch (e) {
-        displaySnackBar(e?.message,"error","bottom","right")
+        displaySnackBar(e?.message, "error", "bottom", "right");
       }
     }
   };
@@ -314,12 +309,11 @@ const ProductIntro = ({
           sx={{ padding: "0 0 0 20px" }}
         >
           {type === "bundle" ? (
-            
             <ProductBundleDetails
-            setting={setting}
-            product={product}
-            setSelectedVariant={setSelectedVariant}
-            selectedVariant={selectedVariant}
+              setting={setting}
+              product={product}
+              setSelectedVariant={setSelectedVariant}
+              selectedVariant={selectedVariant}
             />
           ) : (
             <ProductDetails

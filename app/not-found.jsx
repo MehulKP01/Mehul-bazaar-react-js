@@ -1,6 +1,5 @@
 "use client"
 
-import ShopLayout1 from "components/layouts/ShopLayout1";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import SEO from "components/SEO";

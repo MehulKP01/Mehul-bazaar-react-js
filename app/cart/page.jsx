@@ -9,9 +9,9 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-const SEO = dynamic(() => import("../../src/components/SEO"), { ssr: false });
+const SEO = lazy(() => import("../../src/components/SEO"));
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, useEffect, useMemo, useState } from "react";
 
 import {
   addProductIntoCart,
@@ -23,28 +23,21 @@ import {
 } from "../../src/redux/action.js";
 import { findProductSalePrice } from "lib";
 import { useRouter } from "next/navigation.js";
-const Carousel = dynamic(
-  () => import("../../src/components/carousel/Carousel"),
-  { ssr: false }
+const Carousel = lazy(() => import("../../src/components/carousel/Carousel"));
+const CheckoutNavLayout = lazy(() =>
+  import("../../src/components/layouts/CheckoutNavLayout")
 );
-const CheckoutNavLayout = dynamic(
-  () => import("../../src/components/layouts/CheckoutNavLayout"),
-  { ssr: false }
+const ProductCard7 = lazy(() =>
+  import("../../src/components/product-cards/ProductCard7")
 );
-const ProductCard7 = dynamic(
-  () => import("../../src/components/product-cards/ProductCard7"),
-  { ssr: false }
+const CheckoutSection = lazy(() =>
+  import("../../src/components/CartPage/CheckoutSection.jsx")
 );
-const CheckoutSection = dynamic(
-  () => import("../../src/components/CartPage/CheckoutSection.jsx"),
-  { ssr: false }
-);
-const CartMessage = dynamic(()=> import("./CartMessages.jsx"),{ssr : false})
+const CartMessage = lazy(() => import("./CartMessages.jsx"));
 
 import { currencyFormat } from "../../src/lib";
 import { getMediaPath } from "../../src/lib.js";
 import { api } from "../../src/utils/axiosInstance.js";
-import dynamic from "next/dynamic.js";
 import { displaySnackBar } from "../../src/common/snackBar.js";
 
 const SummaryRow = styled(Box)(({ theme }) => ({

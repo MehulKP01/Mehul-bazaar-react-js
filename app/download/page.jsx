@@ -1,16 +1,12 @@
 "use client";
 
-import React, { memo } from "react";
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
-const GetAppIcon = dynamic(()=> import("@mui/icons-material/GetApp"),{ ssr: false });
+import React, { lazy } from "react";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import GetAppIcon from "@mui/icons-material/GetApp";
 import { downloadData } from "../../src/common/staticData";
-import dynamic from "next/dynamic.js";
-const DownloadCard = dynamic(()=> import('../../src/components/DownloadCard.jsx'),{ ssr: false })
+const DownloadCard = lazy(() =>
+  import("../../src/components/DownloadCard.jsx")
+);
 
 const Download = () => {
   return (
@@ -45,7 +41,7 @@ const Download = () => {
           ))}
         </Grid>
       </Container>
-      </>
+    </>
   );
 };
 

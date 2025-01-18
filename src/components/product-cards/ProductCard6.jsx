@@ -1,9 +1,8 @@
 "use client";
 
-import { Avatar, Box, Card, Chip, styled } from "@mui/material";
+import { Box, Card, Chip, styled } from "@mui/material";
 import HoverBox from "../../components/HoverBox";
 import LazyImage from "../../components/LazyImage";
-import { Paragraph } from "../../components/Typography";
 import { getMediaPath } from "../../lib";
 
 // styled components
@@ -34,15 +33,6 @@ const ProductCard6 = ({ title, subtitle, imgUrl, badgeId }) => {
           left: 12,
         }}
       />
-
-      {/* <StyledChip
-        label={<Paragraph  dangerouslySetInnerHTML={{ __html:subtitle }} />}
-        size="small"
-        sx={{
-          right: 12,
-          zIndex: 2,
-        }}
-      /> */}
 
       <HoverBox borderRadius={2}>
         <Box

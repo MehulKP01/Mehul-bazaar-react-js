@@ -4,30 +4,23 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { Email, Person, Phone } from "@mui/icons-material";
 import { Avatar, Box, Button, InputAdornment, TextField } from "@mui/material";
-const Card1 = dynamic(() => import("../../../src/components/Card1"), {
-  ssr: false,
-});
+const Card1 = lazy(() => import("../../../src/components/Card1"));
 import { FlexBox } from "../../../src/components/flex-box";
-const UserDashboardHeader = dynamic(
-  () => import("../../../src/components/header/UserDashboardHeader"),
-  { ssr: false }
+const UserDashboardHeader = lazy(() =>
+  import("../../../src/components/header/UserDashboardHeader")
 );
-const CustomerDashboardLayout = dynamic(
-  () => import("../../../src/components/layouts/customer-dashboard"),
-  { ssr: false }
+const CustomerDashboardLayout = lazy(() =>
+  import("../../../src/components/layouts/customer-dashboard")
 );
-const CustomerDashboardNavigation = dynamic(
-  () =>
-    import("../../../src/components/layouts/customer-dashboard/Navigations"),
-  { ssr: false }
+const CustomerDashboardNavigation = lazy(() =>
+  import("../../../src/components/layouts/customer-dashboard/Navigations")
 );
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { api } from "../../../src/utils/axiosInstance";
 import { makeStyles } from "@material-ui/core/styles";
 import { setUseProfile } from "../../../src/redux/reducers/user.reducer";
 import { getMediaPath } from "../../../src/lib";
-import dynamic from "next/dynamic";
 import { displaySnackBar } from "../../../src/common/snackBar";
 
 // ===========================================================
@@ -184,7 +177,7 @@ const ProfileEditor = () => {
             headers: {
               "Content-Type": "multipart/form-data",
             },
-          });   
+          });
 
           if (data?.status) {
             dispatch(setUseProfile(data?.user));

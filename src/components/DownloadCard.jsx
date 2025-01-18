@@ -2,9 +2,8 @@
 
 import React from 'react'
 
-import dynamic from 'next/dynamic.js';
-const BazaarImage = dynamic( () => import ("../../src/components/BazaarImage.jsx"),{ ssr: false });
-const InfoOutlinedIcon = dynamic(()=> import("@mui/icons-material/InfoOutlined"),{ ssr: false });
+import BazaarImage from "../../src/components/BazaarImage.jsx";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 import {
     Box,
