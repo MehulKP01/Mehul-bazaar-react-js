@@ -11,6 +11,8 @@ module.exports = {
   },
   images: {
     domains: ['store.digibulkmarketing.com'],
+      // cache optimized images for 60 seconds    
+      minimumCacheTTL: 60,  
   },
   //assetPrefix: 'https://store.digibulkmarketing.com',
 };

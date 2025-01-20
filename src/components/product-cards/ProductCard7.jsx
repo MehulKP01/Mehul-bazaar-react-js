@@ -111,7 +111,7 @@ const ProductCard7 = ({ cartItem, onRemoveProduct, onChangeQuantity }) => {
               {/* Image */}
               <TableCell>
                 <Image
-                  alt={cartItem.productId.name}
+                  alt={cartItem?.productId?.name}
                   width={80}
                   height={80}
                   display="block"
@@ -127,10 +127,10 @@ const ProductCard7 = ({ cartItem, onRemoveProduct, onChangeQuantity }) => {
                 <FlexBox flexDirection="column">
                   {/* Main Product Name */}
                   <Link href={`/product/${cartItem.productId.slug}`}>
-                  <Tooltip title= {cartItem.productId.name} arrow placement="top">
+                  <Tooltip title= {cartItem?.productId?.name} arrow placement="top">
 
                     <Typography sx={{whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', width:'100px'}} fontWeight="600" fontSize={18}  >
-                      {cartItem.productId.name}
+                      {cartItem?.productId?.name}
                     </Typography>
                   </Tooltip>
                   </Link>
@@ -174,7 +174,7 @@ const ProductCard7 = ({ cartItem, onRemoveProduct, onChangeQuantity }) => {
                     sx={{ p: "5px" }}
                     variant="outlined"
                     onClick={handleDecrement}
-                    // disabled={loading}
+                    disabled={loading}
                   >
                     <Remove fontSize="small" />
                   </Button>
@@ -188,6 +188,7 @@ const ProductCard7 = ({ cartItem, onRemoveProduct, onChangeQuantity }) => {
                     sx={{ p: "5px" }}
                     variant="outlined"
                     onClick={handleIncrement}
+                    disabled={loading}
                   >
                     <Add fontSize="small" />
                   </Button>

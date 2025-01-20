@@ -66,10 +66,6 @@ const Cart = () => {
     dispatch(refreshCart());
   }, [dispatch]);
 
-  if (userData?.isGuest) {
-    router.push("/login");
-    return null;
-  }
 
   const handleRemoveProductFromCart = async (productItemId) => {
     const response = await dispatch(removeProductFromCart(productItemId));

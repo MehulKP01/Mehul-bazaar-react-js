@@ -1,8 +1,5 @@
 import Accounts from "./Accounts";
-import AccountSetting from "./AccountSetting";
 import AdminEcommerce from "./AdminEcommerce";
-import Apps from "./Apps";
-import Calender from "./Calender";
 import Chat from "./Chat";
 import Customers from "./Customers";
 import Dashboard from "./Dashboard";
@@ -23,13 +20,11 @@ import Session from "./Session";
 import Settings from "./Settings";
 import Shirt from "./Shirt";
 import Shoe from "./Shoe";
-import SiteSetting from "./SiteSetting";
 import TodoList from "./TodoList";
 import UserProfile from "./UserProfile";
 import UserTie from "./UserTie";
 import Vest from "./Vest";
 export default {
-  Apps,
   AdminEcommerce,
   Dashboard,
   Ecommerce,
@@ -40,7 +35,6 @@ export default {
   UserProfile,
   TableList,
   Accounts,
-  Calender,
   Chat,
   Invoice,
   TodoList,
@@ -53,8 +47,6 @@ export default {
   Refund,
   Seller,
   Order,
-  AccountSetting,
-  SiteSetting,
   Review,
   Shirt,
   Shoe,

@@ -98,7 +98,6 @@ const Carousel = ({
                 maxWidth: `${100 / visibleSlides}%`,
                 padding: "0 10px",
                 boxSizing: "border-box",
-                transition: 'all 0.3s ease',
               }}
             >
               {child}
@@ -174,5 +173,3 @@ const Carousel = ({
 };
 
 export default Carousel;
-
-

@@ -624,6 +624,7 @@ const ProductDetails = ({ product, setSelectedVariant, selectedVariant }) => {
                 }}
                 color="primary"
                 variant="outlined"
+                disabled={isQuantity}
                 onClick={(e) =>
                   handleChangeQtyCart((cartProduct?.quantity ?? 0) - 1)
                 }
@@ -646,6 +647,7 @@ const ProductDetails = ({ product, setSelectedVariant, selectedVariant }) => {
                 }}
                 color="primary"
                 variant="outlined"
+                disabled={isQuantity}
                 onClick={(e) =>
                   handleChangeQtyCart((cartProduct?.quantity ?? 0) + 1)
                 }
