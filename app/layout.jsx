@@ -74,7 +74,7 @@ function App({ children }) {
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
                 <CacheProvider value={clientSideEmotionCache}>
-                  <Ordersale />
+                  {/* <Ordersale /> */}
                   <SEO
                     title="App Title"
                     description="App Description"

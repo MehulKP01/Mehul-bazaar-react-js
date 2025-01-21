@@ -1,7 +1,7 @@
 "use client";
 
 import { lazy, memo, useEffect, useState } from "react";
-import { Button, Grid, Pagination } from "@mui/material";
+import { Box, Button, Grid, Pagination } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 const SEO = lazy(() => import("../../src/components/SEO"));
 import { FlexBox } from "../../src/components/flex-box";
@@ -19,15 +19,18 @@ const CustomerDashboardNavigation = lazy(() =>
 );
 import { useDispatch, useSelector } from "react-redux";
 import { getWishlistProducts } from "../../src/redux/action.js";
+import Skeleton from "@mui/material/Skeleton";
 
 const WishList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const rowsPerPage = 6;
   const wishlistData = useSelector((state) => state?.shop?.wishlistProducts);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
     async function fetchDataWishlist() {
       try {
         const response = await dispatch(
@@ -38,8 +41,10 @@ const WishList = () => {
         );
         const { total } = response;
         setTotal(total);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching wishlist data:", error);
+        setIsLoading(false);
       }
     }
 
@@ -78,18 +83,27 @@ const WishList = () => {
         </FlexBox>
       ) : (
         <>
-          <Grid container spacing={3}>
-            {wishlistData?.products?.map((item) => (
-              <Grid item lg={4} sm={6} xs={12} key={item.id}>
-                <ProductCard1 product={item} />
-              </Grid>
-            ))}
-          </Grid>
+          {isLoading ? (
+            <Box sx={{ display: "flex", flexDirection: "row", gap: "30px" }}>
+              <Skeleton width={"300px"} height={"300px"} />
+              <Skeleton animation="wave" width={"300px"} height={"300px"} />
+              <Skeleton animation={false} width={"300px"} height={"300px"} />
+              <Skeleton animation="wave" width={"300px"} height={"300px"} />
+            </Box>
+          ) : (
+            <Grid container spacing={3}>
+              {wishlistData?.products?.map((item) => (
+                <Grid item lg={4} sm={6} xs={12} key={item.id}>
+                  <ProductCard1 product={item} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
           <FlexBox justifyContent="center" mt={5}>
             <Pagination
               color="primary"
               variant="outlined"
-              total={Math.ceil(wishlistData?.total / rowsPerPage)}
+              count={Math.ceil(wishlistData?.total / rowsPerPage)}
               page={currentPage}
               onChange={handleChangePage}
               disabled={totalPages === 1}
